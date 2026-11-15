@@ -9,8 +9,8 @@ import { execFileSync } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const REPO = "https://github.com/HarshalKudale/knobdeck-themes";
-const RAW = "https://raw.githubusercontent.com/HarshalKudale/knobdeck-themes/master";
+const REPO = "https://github.com/Knobdeck/knobdeck-themes";
+const RAW = "https://raw.githubusercontent.com/Knobdeck/knobdeck-themes/master";
 const [tag, prevDir] = process.argv.slice(2);
 if (!tag) throw new Error("usage: build-registry.mjs <tag> [prev dir]");
 const index = JSON.parse(readFileSync("index.json", "utf8"));
