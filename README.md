@@ -23,8 +23,9 @@ Dial themes for KnobDeck, all original. The app ships three built-ins (**Auto**,
   registry links it by raw GitHub URL, so a new GIF shows up without a release.
 
 Pushing to `master` runs the **release** workflow: it zips every theme and publishes a GitHub Release
-with `<id>.zip` and a `registry.json` (id, name, author, version, zipUrl, sha256, preview). Then run
-the **registries** workflow in `knobdeck-registry` so the app sees it.
+with `<id>.zip` and a `registry.json` (id, name, author, version, zipUrl, sha256, preview). Once the release
+exists it sends a `theme-released` dispatch to the `knobdeck-registry` catalog, which rebuilds and serves it (skipped
+until the catalog GitHub App is configured: `CATALOG_APP_ID` variable, `CATALOG_APP_PRIVATE_KEY` secret).
 
 ## Writing a theme
 
