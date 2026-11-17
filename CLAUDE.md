@@ -14,8 +14,8 @@ Put the same version in `index.json`. CI fails if `index.json` and `theme.json` 
 rebuilds a theme only when its `index.json` version differs from the previous release's `registry.json`; any other
 theme's zip is copied over from that release unchanged. So without the bump, your change is not published.
 
-New theme: add `themes/<id>/`, `previews/<id>.gif` and an `index.json` entry. After the release, run the
-`knobdeck-registry` repo's **registries** workflow so the app sees it.
+New theme: add `themes/<id>/`, `previews/<id>.gif` and an `index.json` entry. The release workflow then tells
+the `knobdeck-registry` catalog (a `theme-released` dispatch) to rebuild, so the app sees it without a manual step.
 
 ## Rule 3: every theme is original and checked
 

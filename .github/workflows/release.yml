@@ -2,8 +2,8 @@
 # time (v2026.11.03-1930). The release holds only <id>.zip per theme and one registry.json (id, name,
 # author, version, zipUrl, sha256, preview). Previews are not assets: `preview` is a raw link to
 # previews/<id>.gif in this repo. A theme is rebuilt only when its version in index.json differs from the previous release's; the others are
-# copied over from it. To ship an update, bump the version (see CLAUDE.md). The website repo pulls
-# the latest release.
+# copied over from it. To ship an update, bump the version (see CLAUDE.md). After the release is created it tells the
+# knobdeck-registry catalog (repository_dispatch theme-released), which rebuilds and serves it.
 name: release
 on:
   push:
@@ -37,3 +37,20 @@ jobs:
         run: |
           notes=$(jq -r '[.themes[] | "\(.id) \(.version)"] | join(", ")' out/registry.json)
           gh release create "$TAG" out/* --title "$TAG" --notes "Themes - $notes"
+      - name: Catalog app token
+        id: app
+        if: vars.CATALOG_APP_ID != ''
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.CATALOG_APP_ID }}
+          private-key: ${{ secrets.CATALOG_APP_PRIVATE_KEY }}
+          owner: Knobdeck
+          repositories: knobdeck-registry
+      - name: Tell the catalog
+        if: steps.app.outputs.token != ''
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+        run: |
+          jq -n --arg repo "$GITHUB_REPOSITORY" --arg tag "$TAG" \
+            '{event_type: "theme-released", client_payload: {repo: $repo, tag: $tag}}' |
+            gh api repos/Knobdeck/knobdeck-registry/dispatches --input -
