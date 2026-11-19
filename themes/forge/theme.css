@@ -100,14 +100,18 @@
    the baked stone maps, one per item, to whatever wedge each item gets. The CSS places the wheel and
    the medallion and lights the runes (the icons) on the slabs. */
 
+/* Up to about ten items the ring is its drawn size; past that the engine grows it so every item
+   keeps its share (slices `ringSpacing`, 9.6 px per item), and the wheel and medallion grow with
+   it by --kd-ring-scale. */
 .menu-node {
+  --ring-scale: var(--kd-ring-scale, 1);
   --child-distance: 96px;
-  --sibling-spacing: 4px;
-  --center-size: 112px;
+  --sibling-spacing: 9.6px;
+  --center-size: calc(112px * var(--ring-scale));
   --child-size: 40px;
   --child-size-base: 40px;
   --connector-width: 0px;
-  --plate-size: 392px;
+  --plate-size: calc(392px * var(--ring-scale));
   --ease: cubic-bezier(0.2, 0.9, 0.3, 1.1);
   --menu-transition: all 300ms var(--ease);
 
@@ -147,7 +151,7 @@
      hovered item's name takes its place. */
   &.active > .face {
     color: var(--rune-hot);
-    background: url("medallion.webp") center / 120px 120px no-repeat;
+    background: url("medallion.webp") center / calc(120px * var(--ring-scale)) calc(120px * var(--ring-scale)) no-repeat;
     filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
   }
 
