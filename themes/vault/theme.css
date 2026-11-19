@@ -1,0 +1,429 @@
+/* Vault: A safe door: a combination ring that turns against your pointer, a ridged knob that swings to face what you point at, and items as bolts.
+   A KnobDeck dial theme (CC0-1.0). Colours come from theme.json and presets/. */
+
+/* ── Structure: where nodes sit and how big they are in each state ── */
+
+.menu-node {
+  --ring-distance: max(var(--child-distance), var(--sibling-spacing, 10.5px) * var(--sibling-count));
+  transition: var(--menu-transition);
+
+  &.child {
+    transform: translate(calc(var(--ring-distance) * var(--dir-x)), calc(var(--ring-distance) * var(--dir-y)));
+  }
+
+  &.dragged {
+    transition: none;
+  }
+
+  .face {
+    position: absolute;
+    z-index: 1;
+    transition: var(--menu-transition), background 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  }
+
+  .icon-container {
+    opacity: 0;
+    transition: opacity 160ms ease, color 120ms ease;
+  }
+
+  &.active > .face > .icon-container,
+  &.parent > .face > .icon-container,
+  &.child > .face > .icon-container {
+    opacity: 1;
+  }
+
+  /* With a child hovered, the center shows its name instead of an icon. */
+  &.active:has(> .hovered) > .face > .icon-container {
+    opacity: 0;
+  }
+
+  &.active > .face {
+    top: calc(var(--center-size) / -2);
+    left: calc(var(--center-size) / -2);
+    width: var(--center-size);
+    height: var(--center-size);
+  }
+
+  &.parent > .face,
+  &.child > .face {
+    top: calc(var(--child-size) / -2);
+    left: calc(var(--child-size) / -2);
+    width: var(--child-size);
+    height: var(--child-size);
+  }
+
+  &.hovered.clicked > .face {
+    scale: 0.92;
+  }
+
+  .connector {
+    height: var(--connector-width);
+    top: calc(var(--connector-width) / -2);
+    transition: var(--menu-transition);
+  }
+
+  &:has(.dragged) > .connector {
+    transition: none;
+  }
+}
+
+.center-text {
+  transition: opacity 160ms ease;
+}
+
+.selection-wedges {
+  mask: radial-gradient(circle at var(--center-x) var(--center-y), #000 96px, transparent 50%);
+  background: var(--wedge-color, transparent);
+
+  &.hovered {
+    --width: calc(var(--end-angle) - var(--start-angle));
+    background: conic-gradient(
+      from var(--start-angle) at var(--center-x) var(--center-y),
+      var(--wedge-highlight-color, transparent) var(--width),
+      var(--wedge-color, transparent) var(--width)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-node,
+  .menu-node > *,
+  .menu-node > * > * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ── Look ── */
+
+.menu-node {
+  --child-distance: 112px;
+  --center-size: 100px;
+  --child-size: 44px;
+  --child-size-base: 44px;
+  --connector-width: 0px;
+  --plate-size: 340px;
+  --grip-size: 118px;
+  --ease: cubic-bezier(0.25, 0.9, 0.3, 1.05);
+  --menu-transition: all 300ms var(--ease);
+  --steel: radial-gradient(circle at 38% 28%, var(--steel-light), var(--steel-mid) 48%, var(--steel-dark));
+  --brushed: repeating-conic-gradient(rgba(255, 255, 255, 0.05) 0deg 0.6deg, transparent 0.6deg 1.8deg);
+
+  .face {
+    color: var(--icon-color);
+  }
+
+  .plate,
+  .lit,
+  .ring,
+  .index,
+  .grip,
+  .shade {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  &.active > .plate,
+  &.active > .ring,
+  &.active > .index,
+  &.active > .shade {
+    display: block;
+    top: calc(var(--plate-size) / -2);
+    left: calc(var(--plate-size) / -2);
+    width: var(--plate-size);
+    height: var(--plate-size);
+  }
+
+  &.active > .shade {
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.65), transparent);
+    translate: 0 14px;
+    scale: 1.05;
+    filter: blur(12px);
+  }
+
+  /* The safe door: brushed steel inside a dark bezel. The bezel lights where you point. */
+  &.active > .plate {
+    --door:
+      radial-gradient(closest-side, transparent 0 82%, rgba(0, 0, 0, 0.55) 82% 83%, var(--bezel-light) 83% 84%, var(--bezel) 84% 99%, rgba(0, 0, 0, 0.7) 99%),
+      var(--brushed),
+      var(--steel);
+    background: var(--door);
+    transition: --hover-angle 160ms var(--ease);
+  }
+
+  /* The bezel lights under the item you point at. */
+  &.active:has(> .hovered) > .lit {
+    display: block;
+    top: calc(var(--plate-size) / -2);
+    left: calc(var(--plate-size) / -2);
+    width: var(--plate-size);
+    height: var(--plate-size);
+    background: conic-gradient(from calc(var(--hover-angle) - 14deg), var(--wedge-highlight-color) 0deg 28deg, transparent 28deg);
+    mask: radial-gradient(closest-side, transparent 0 84%, #000 84% 99%, transparent 99%);
+    transition: --hover-angle 160ms var(--ease);
+  }
+
+  /* The combination ring turns the other way to the pointer, like a real dial. */
+  &.active > .ring {
+    background: var(--number-color);
+    mask: url("dial-ring.svg") center / 100% 100% no-repeat;
+    rotate: calc(var(--pointer-angle) * -0.6);
+    transition: --pointer-angle 260ms var(--ease);
+    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
+  }
+
+  /* The fixed index mark at the top. */
+  &.active > .index {
+    background: conic-gradient(from -4deg, var(--index-color) 0deg 8deg, transparent 8deg);
+    mask: radial-gradient(closest-side, transparent 0 90%, #000 90% 99%, transparent 99%);
+    filter: drop-shadow(0 0 4px var(--index-color));
+  }
+
+  /* The knob: a ridged grip that turns to face what you point at, a domed cap on top. */
+  &.active > .grip {
+    display: block;
+    top: calc(var(--grip-size) / -2);
+    left: calc(var(--grip-size) / -2);
+    width: var(--grip-size);
+    height: var(--grip-size);
+    background:
+      linear-gradient(var(--index-color), var(--index-color)) 50% 3px / 4px 14px no-repeat,
+      repeating-conic-gradient(rgba(0, 0, 0, 0.35) 0deg 4deg, rgba(255, 255, 255, 0.10) 4deg 8deg),
+      var(--steel);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(0, 0, 0, 0.5);
+    rotate: var(--hover-angle);
+    transition: --hover-angle 220ms var(--ease);
+  }
+
+  &.active > .face {
+    border-radius: 50%;
+    color: var(--cap-icon-color);
+    background: radial-gradient(circle at 40% 30%, var(--cap-light), var(--cap-dark) 72%);
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.4), inset 0 -8px 14px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Items: domed bolts in the door. */
+  &.parent > .face,
+  &.child > .face {
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.7), transparent 32%),
+      var(--steel);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.28), 0 5px 10px rgba(0, 0, 0, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+  }
+
+  &.child.hovered > .face,
+  &.parent.hovered > .face {
+    color: var(--accent-ink);
+    scale: 1.16;
+    background:
+      radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.6), transparent 34%),
+      radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--accent-color) 70%, white), var(--accent-color) 60%);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.4), 0 0 18px var(--accent-color);
+  }
+
+  .connector {
+    background: transparent;
+  }
+}
+
+.selection-wedges {
+  display: none;
+}
+
+.center-text {
+  color: var(--cap-icon-color);
+  font-family: "DIN Alternate", "Bahnschrift", "DIN", "Roboto Condensed", "Arial Narrow", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Sliders: a dial scale (`sliderStyle: "track"`) ──
+   A slider opens as a knob on a plate. Every value it can take is a tick on the scale; the
+   engine numbers the round ones (`major`, `data-tick`) and lights the ones up to the value
+   (`filled`). */
+
+.menu-node {
+  --scale-plate-size: 220px;
+  --scale-radius: 102px;
+  --scale-tick-length: 6px;
+  --scale-major-length: 12px;
+  --scale-tick-width: 1.5px;
+  --scale-major-width: 2px;
+  --scale-label-radius: 77px;
+  --scale-pointer-radius: calc(var(--center-size) / 2 - 5px);
+  --scale-pointer-length: 12px;
+  --scale-pointer-width: 3px;
+  --scale-tick-color: color-mix(in srgb, var(--icon-color) 36%, transparent);
+  --scale-lit-color: var(--accent-color);
+  --scale-lit-glow: 0 0 5px var(--accent-color);
+  --scale-label-color: color-mix(in srgb, var(--icon-color) 72%, transparent);
+  --scale-label-lit-color: var(--text-color);
+  --scale-font: 600 9px/1 "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --scale-value-color: var(--text-color);
+  --scale-value-font: 600 16px/1 "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.menu-node.slider-menu {
+  /* The plate under the scale (a div the engine adds). */
+  & > .kd-scale-plate {
+    top: calc(var(--scale-plate-size) / -2);
+    left: calc(var(--scale-plate-size) / -2);
+    width: var(--scale-plate-size);
+    height: var(--scale-plate-size);
+    border-radius: 50%;
+    opacity: 0;
+    scale: 0.6;
+    transition: var(--menu-transition);
+  }
+
+  &.active > .kd-scale-plate {
+    opacity: 1;
+    scale: 1;
+  }
+
+  /* The pointer keeps up with the value, whatever the menu's own easing. */
+  &.active {
+    transition: var(--menu-transition), --slider-fill 90ms linear;
+  }
+
+  /* A value stop is a tick: it grows inwards from the scale's radius. */
+  &.active > .slider-step.child {
+    --tick-length: var(--scale-tick-length);
+    --tick-width: var(--scale-tick-width);
+    transform: none;
+    scale: none;
+    transition: opacity 160ms ease;
+
+    & > * {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: calc(var(--tick-width) / -2);
+      width: var(--tick-width);
+      height: var(--tick-length);
+      border-radius: var(--scale-tick-cap, 1px);
+      background: var(--scale-tick-color);
+      box-shadow: var(--scale-tick-shadow, none);
+      transform-origin: 50% 0;
+      transform: rotate(var(--angle)) translateY(calc(-1 * var(--scale-radius)));
+    }
+
+    &.major {
+      --tick-length: var(--scale-major-length);
+      --tick-width: var(--scale-major-width);
+    }
+
+    &.hovered {
+      --tick-length: calc(var(--scale-major-length) + 3px);
+      --tick-width: var(--scale-major-width);
+    }
+
+    /* Lit up to the value; `current` stays lit while another value is hovered. */
+    &.filled::before,
+    &.current::before,
+    &.hovered::before {
+      background: var(--scale-lit-color);
+      box-shadow: var(--scale-lit-glow, var(--scale-tick-shadow, none));
+    }
+
+    /* The number of a major tick. */
+    &.major::after {
+      content: attr(data-tick);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(
+        calc(var(--dir-x) * var(--scale-label-radius) - 50%),
+        calc(var(--dir-y) * var(--scale-label-radius) - 50%)
+      );
+      color: var(--scale-label-color);
+      font: var(--scale-font);
+      font-variant-numeric: tabular-nums;
+      text-shadow: var(--scale-label-shadow, none);
+      white-space: nowrap;
+    }
+
+    &.major.filled::after,
+    &.major.hovered::after {
+      color: var(--scale-label-lit-color);
+    }
+  }
+
+  /* The pointer on the knob. */
+  &.active::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: calc(var(--scale-pointer-width) / -2);
+    width: var(--scale-pointer-width);
+    height: var(--scale-pointer-length);
+    border-radius: var(--scale-pointer-width);
+    background: var(--scale-pointer-color);
+    box-shadow: var(--scale-pointer-glow, none);
+    transform-origin: 50% 0;
+    transform: rotate(calc(var(--slider-start-angle) + var(--slider-fill))) translateY(calc(-1 * var(--scale-pointer-radius)));
+    pointer-events: none;
+  }
+
+  /* The knob reads out the value: the hovered one, else the live one. */
+  &.active > .face > .icon-container {
+    opacity: 0;
+  }
+
+  &.active::before {
+    content: var(--slider-readout, var(--slider-value, ""));
+    position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    color: var(--scale-value-color);
+    font: var(--scale-value-font);
+    font-variant-numeric: tabular-nums;
+    text-shadow: var(--scale-value-shadow, none);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* Apps up to 0.3.2 print the hovered value as center text instead. */
+  &.active.slider-previewing:not(.kd-scale)::before {
+    opacity: 0;
+  }
+}
+
+.menu-node {
+  --scale-tick-color: color-mix(in srgb, var(--number-color) 55%, transparent);
+  --scale-label-color: var(--number-color);
+  --scale-label-lit-color: var(--accent-color);
+  --scale-pointer-color: var(--index-color);
+  --scale-pointer-glow: 0 0 5px var(--index-color);
+  --scale-value-color: var(--cap-icon-color);
+  --scale-font: 700 9px/1 "DIN Alternate", "Bahnschrift", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --scale-value-font: 700 18px/1 "DIN Alternate", "Bahnschrift", "Roboto Condensed", "Arial Narrow", sans-serif;
+}
+
+.menu-node.slider-menu {
+  /* The slider opens on a small dark bezel. */
+  & > .kd-scale-plate {
+    background: var(--brushed), radial-gradient(closest-side, var(--bezel-light), var(--bezel) 80%);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5), 0 14px 30px rgba(0, 0, 0, 0.55);
+  }
+
+  &.active > .plate,
+  &.active > .ring,
+  &.active > .lit,
+  &.active > .index,
+  &.active > .shade,
+  &.active > .grip {
+    display: none;
+  }
+}

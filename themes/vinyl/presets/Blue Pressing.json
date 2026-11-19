@@ -1,0 +1,11 @@
+{
+  "colors": {
+    "vinyl-color": "#0b2a5c",
+    "vinyl-light": "#1c4a8f",
+    "vinyl-groove": "rgba(180, 215, 255, 0.07)",
+    "label-color": "#f5f1e6",
+    "label-ink": "#0d2347",
+    "accent-color": "#7cc4ff",
+    "icon-color": "#e6f1ff"
+  }
+}
