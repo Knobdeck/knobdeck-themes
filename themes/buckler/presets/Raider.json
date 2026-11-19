@@ -1,7 +1,0 @@
-{
-  "colors": {
-    "paint": "conic-gradient(from 45deg, rgba(178, 30, 30, 0.78) 0deg 90deg, rgba(240, 228, 205, 0.7) 90deg 180deg, rgba(178, 30, 30, 0.78) 180deg 270deg, rgba(240, 228, 205, 0.7) 270deg)",
-    "accent-color": "#ff5b4a",
-    "accent-ink": "#2a0703"
-  }
-}

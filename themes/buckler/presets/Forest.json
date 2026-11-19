@@ -1,9 +1,0 @@
-{
-  "colors": {
-    "paint": "radial-gradient(closest-side, rgba(36, 92, 48, 0.75) 0 55%, rgba(222, 210, 170, 0.6) 55% 66%, rgba(36, 92, 48, 0.75) 66%)",
-    "accent-color": "#9cff6a",
-    "accent-ink": "#0f2a05",
-    "badge-light": "#2f5a36",
-    "badge-dark": "#16301b"
-  }
-}

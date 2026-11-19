@@ -1,9 +1,0 @@
-{
-  "colors": {
-    "paint": "conic-gradient(rgba(30, 58, 138, 0.8) 0deg 90deg, rgba(212, 170, 60, 0.75) 90deg 180deg, rgba(30, 58, 138, 0.8) 180deg 270deg, rgba(212, 170, 60, 0.75) 270deg)",
-    "accent-color": "#ffd45a",
-    "accent-ink": "#2b2000",
-    "badge-light": "#2d3f7a",
-    "badge-dark": "#141d3d"
-  }
-}
