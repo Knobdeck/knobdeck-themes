@@ -1,0 +1,403 @@
+/* Forge: A rusted iron wheel set with carved stone slabs: every item is a slab cut to its slot, its rune glowing, the hovered one lifting out of the stone.
+   A KnobDeck dial theme (CC0-1.0). Colours come from theme.json and presets/. */
+
+/* ── Structure: where nodes sit and how big they are in each state ── */
+
+.menu-node {
+  --ring-distance: max(var(--child-distance), var(--sibling-spacing, 10.5px) * var(--sibling-count));
+  transition: var(--menu-transition);
+
+  &.child {
+    transform: translate(calc(var(--ring-distance) * var(--dir-x)), calc(var(--ring-distance) * var(--dir-y)));
+  }
+
+  &.dragged {
+    transition: none;
+  }
+
+  .face {
+    position: absolute;
+    z-index: 1;
+    transition: var(--menu-transition), background 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  }
+
+  .icon-container {
+    opacity: 0;
+    transition: opacity 160ms ease, color 120ms ease;
+  }
+
+  &.active > .face > .icon-container,
+  &.parent > .face > .icon-container,
+  &.child > .face > .icon-container {
+    opacity: 1;
+  }
+
+  /* With a child hovered, the center shows its name instead of an icon. */
+  &.active:has(> .hovered) > .face > .icon-container {
+    opacity: 0;
+  }
+
+  &.active > .face {
+    top: calc(var(--center-size) / -2);
+    left: calc(var(--center-size) / -2);
+    width: var(--center-size);
+    height: var(--center-size);
+  }
+
+  &.parent > .face,
+  &.child > .face {
+    top: calc(var(--child-size) / -2);
+    left: calc(var(--child-size) / -2);
+    width: var(--child-size);
+    height: var(--child-size);
+  }
+
+  &.hovered.clicked > .face {
+    scale: 0.92;
+  }
+
+  .connector {
+    height: var(--connector-width);
+    top: calc(var(--connector-width) / -2);
+    transition: var(--menu-transition);
+  }
+
+  &:has(.dragged) > .connector {
+    transition: none;
+  }
+}
+
+.center-text {
+  transition: opacity 160ms ease;
+}
+
+.selection-wedges {
+  mask: radial-gradient(circle at var(--center-x) var(--center-y), #000 96px, transparent 50%);
+  background: var(--wedge-color, transparent);
+
+  &.hovered {
+    --width: calc(var(--end-angle) - var(--start-angle));
+    background: conic-gradient(
+      from var(--start-angle) at var(--center-x) var(--center-y),
+      var(--wedge-highlight-color, transparent) var(--width),
+      var(--wedge-color, transparent) var(--width)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-node,
+  .menu-node > *,
+  .menu-node > * > * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ── Look ──
+   The wheel (plate.webp) and the medallion (medallion.webp) are renders (art/forge/build.py). The
+   stone slabs are not in the CSS at all: theme.json's `slices` has the dial engine cut them live from
+   the baked stone maps, one per item, to whatever wedge each item gets. The CSS places the wheel and
+   the medallion and lights the runes (the icons) on the slabs. */
+
+.menu-node {
+  --child-distance: 96px;
+  --sibling-spacing: 4px;
+  --center-size: 112px;
+  --child-size: 40px;
+  --child-size-base: 40px;
+  --connector-width: 0px;
+  --plate-size: 392px;
+  --ease: cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  --menu-transition: all 300ms var(--ease);
+
+  .face {
+    color: var(--rune-1);
+  }
+
+  .plate,
+  .shade {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &.active > .plate,
+  &.active > .shade {
+    display: block;
+    top: calc(var(--plate-size) / -2);
+    left: calc(var(--plate-size) / -2);
+    width: var(--plate-size);
+    height: var(--plate-size);
+  }
+
+  &.active > .shade {
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.45) 75%, transparent);
+    translate: 8px 14px;
+    filter: blur(16px);
+  }
+
+  &.active > .plate {
+    background: url("plate.webp") center / 100% 100% no-repeat;
+    animation: forge-in 380ms var(--ease) both;
+  }
+
+  /* The medallion is the center; the hovered item's name is struck over it. */
+  &.active > .face {
+    background: url("medallion.webp") center / 120px 120px no-repeat;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+  }
+
+  &.active > .face > .icon-container {
+    opacity: 0 !important;
+  }
+
+  /* Items: the runes on the slabs, glowing in turn blue, orange and gold. */
+  &.child > .face {
+    border-radius: 50%;
+    color: var(--rune-1);
+    transition: var(--menu-transition), color 140ms ease, filter 140ms ease;
+    filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 9px color-mix(in srgb, currentColor 70%, transparent));
+  }
+
+  &.child:nth-child(3n + 2 of .child) > .face { color: var(--rune-2); }
+  &.child:nth-child(3n of .child) > .face { color: var(--rune-3); }
+
+  &.child.hovered > .face {
+    color: var(--rune-hot) !important;
+    scale: 1.18;
+    filter: drop-shadow(0 0 4px var(--accent-color)) drop-shadow(0 0 14px var(--accent-color)) drop-shadow(0 0 26px var(--accent-color));
+  }
+
+  &.child.hovered.clicked > .face {
+    scale: 1.05;
+  }
+
+  /* Without the slice renderer (an older app, no WebGL): plain stone discs. */
+  &.active:not(.kd-sliced) > .child > .face {
+    background: radial-gradient(circle at 40% 30%, #4a4a4c, #1d1d1f 72%);
+    box-shadow: 0 0 0 2px #0d0d0e, 0 6px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  /* The menu you came from: a small stone. */
+  &.parent > .face {
+    border-radius: 50%;
+    color: var(--rune-2);
+    background: radial-gradient(circle at 40% 30%, #4a4a4c, #1d1d1f 72%);
+    box-shadow: 0 0 0 2px #0d0d0e, 0 6px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .connector {
+    background: transparent;
+  }
+}
+
+@keyframes forge-in {
+  from { opacity: 0; scale: 0.9; rotate: -8deg; }
+}
+
+.selection-wedges {
+  display: none;
+}
+
+.center-text {
+  color: var(--text-color);
+  font-family: "Trajan Pro", "Cinzel", "Optima", "Palatino Linotype", Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.95), 0 1px 2px #000;
+}
+
+/* A name over the medallion: the medallion steps back so the text reads. */
+.menu-node.active:has(> .hovered) > .face {
+  filter: brightness(0.5) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+}
+
+/* ── Sliders: a dial scale (`sliderStyle: "track"`) ──
+   A slider opens as a knob on a plate. Every value it can take is a tick on the scale; the
+   engine numbers the round ones (`major`, `data-tick`) and lights the ones up to the value
+   (`filled`). */
+
+.menu-node {
+  --scale-plate-size: 220px;
+  --scale-radius: 102px;
+  --scale-tick-length: 6px;
+  --scale-major-length: 12px;
+  --scale-tick-width: 1.5px;
+  --scale-major-width: 2px;
+  --scale-label-radius: 77px;
+  --scale-pointer-radius: calc(var(--center-size) / 2 - 5px);
+  --scale-pointer-length: 12px;
+  --scale-pointer-width: 3px;
+  --scale-tick-color: color-mix(in srgb, var(--icon-color) 36%, transparent);
+  --scale-lit-color: var(--accent-color);
+  --scale-lit-glow: 0 0 5px var(--accent-color);
+  --scale-label-color: color-mix(in srgb, var(--icon-color) 72%, transparent);
+  --scale-label-lit-color: var(--text-color);
+  --scale-font: 600 9px/1 "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --scale-value-color: var(--text-color);
+  --scale-value-font: 600 16px/1 "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.menu-node.slider-menu {
+  /* The plate under the scale (a div the engine adds). */
+  & > .kd-scale-plate {
+    top: calc(var(--scale-plate-size) / -2);
+    left: calc(var(--scale-plate-size) / -2);
+    width: var(--scale-plate-size);
+    height: var(--scale-plate-size);
+    border-radius: 50%;
+    opacity: 0;
+    scale: 0.6;
+    transition: var(--menu-transition);
+  }
+
+  &.active > .kd-scale-plate {
+    opacity: 1;
+    scale: 1;
+  }
+
+  /* The pointer keeps up with the value, whatever the menu's own easing. */
+  &.active {
+    transition: var(--menu-transition), --slider-fill 90ms linear;
+  }
+
+  /* A value stop is a tick: it grows inwards from the scale's radius. */
+  &.active > .slider-step.child {
+    --tick-length: var(--scale-tick-length);
+    --tick-width: var(--scale-tick-width);
+    transform: none;
+    scale: none;
+    transition: opacity 160ms ease;
+
+    & > * {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: calc(var(--tick-width) / -2);
+      width: var(--tick-width);
+      height: var(--tick-length);
+      border-radius: var(--scale-tick-cap, 1px);
+      background: var(--scale-tick-color);
+      box-shadow: var(--scale-tick-shadow, none);
+      transform-origin: 50% 0;
+      transform: rotate(var(--angle)) translateY(calc(-1 * var(--scale-radius)));
+    }
+
+    &.major {
+      --tick-length: var(--scale-major-length);
+      --tick-width: var(--scale-major-width);
+    }
+
+    &.hovered {
+      --tick-length: calc(var(--scale-major-length) + 3px);
+      --tick-width: var(--scale-major-width);
+    }
+
+    /* Lit up to the value; `current` stays lit while another value is hovered. */
+    &.filled::before,
+    &.current::before,
+    &.hovered::before {
+      background: var(--scale-lit-color);
+      box-shadow: var(--scale-lit-glow, var(--scale-tick-shadow, none));
+    }
+
+    /* The number of a major tick. */
+    &.major::after {
+      content: attr(data-tick);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(
+        calc(var(--dir-x) * var(--scale-label-radius) - 50%),
+        calc(var(--dir-y) * var(--scale-label-radius) - 50%)
+      );
+      color: var(--scale-label-color);
+      font: var(--scale-font);
+      font-variant-numeric: tabular-nums;
+      text-shadow: var(--scale-label-shadow, none);
+      white-space: nowrap;
+    }
+
+    &.major.filled::after,
+    &.major.hovered::after {
+      color: var(--scale-label-lit-color);
+    }
+  }
+
+  /* The pointer on the knob. */
+  &.active::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: calc(var(--scale-pointer-width) / -2);
+    width: var(--scale-pointer-width);
+    height: var(--scale-pointer-length);
+    border-radius: var(--scale-pointer-width);
+    background: var(--scale-pointer-color);
+    box-shadow: var(--scale-pointer-glow, none);
+    transform-origin: 50% 0;
+    transform: rotate(calc(var(--slider-start-angle) + var(--slider-fill))) translateY(calc(-1 * var(--scale-pointer-radius)));
+    pointer-events: none;
+  }
+
+  /* The knob reads out the value: the hovered one, else the live one. */
+  &.active > .face > .icon-container {
+    opacity: 0;
+  }
+
+  &.active::before {
+    content: var(--slider-readout, var(--slider-value, ""));
+    position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    color: var(--scale-value-color);
+    font: var(--scale-value-font);
+    font-variant-numeric: tabular-nums;
+    text-shadow: var(--scale-value-shadow, none);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* Apps up to 0.3.2 print the hovered value as center text instead. */
+  &.active.slider-previewing:not(.kd-scale)::before {
+    opacity: 0;
+  }
+}
+
+.menu-node {
+  --scale-tick-color: rgba(255, 230, 190, 0.4);
+  --scale-label-color: rgba(255, 230, 196, 0.85);
+  --scale-label-lit-color: #fff4dc;
+  --scale-lit-color: var(--accent-color);
+  --scale-lit-glow: 0 0 6px var(--accent-color);
+  --scale-pointer-color: var(--accent-color);
+  --scale-pointer-glow: 0 0 6px var(--accent-color);
+  --scale-value-color: var(--text-color);
+  --scale-value-shadow: 0 0 6px #000;
+  --scale-label-shadow: 0 1px 2px #000;
+  --scale-font: 700 9px/1 "Cinzel", "Optima", Georgia, serif;
+  --scale-value-font: 700 17px/1 "Cinzel", "Optima", Georgia, serif;
+}
+
+.menu-node.slider-menu {
+  & > .kd-scale-plate {
+    background: url("plate.webp") center / 112% 112% no-repeat;
+    filter: brightness(0.6);
+    border-radius: 50%;
+  }
+
+  &.active > .plate,
+  &.active > .shade {
+    display: none;
+  }
+}

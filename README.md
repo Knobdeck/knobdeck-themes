@@ -17,6 +17,7 @@ Dial themes for KnobDeck, all original. The app ships three built-ins (**Auto**,
 | `aurora` | Dark glass with a turning aurora glow | Solar, Ocean, Rose |
 | `studio` | Creator console with an on-air light | Violet, Teal, Gold |
 | `contrast` | Accessibility: bold outlines, large targets, almost no motion | Black on White, White on Blue |
+| `forge` | A rusted iron wheel set with carved stone slabs: each item is a slab cut to its slot, its rune glowing (engine 2) | Frost, Hellfire, Venom |
 
 - `themes/<id>/`: `theme.json`, `theme.css`, optional `presets/<Name>.json` and assets the CSS links
   relatively (`url("plate.webp")`).
@@ -47,6 +48,7 @@ The dial engine is `Knobdeck/app/src/dial/overlay/` (Kando's theme format, engin
 | `sliderStyle` | `"track"` (every theme here): a slider opens as a dial scale. Each value stop is a tick: every step of the slider, or every 2nd / 5th / 10th… when that is more than 61, spread over 300°. See the slider hooks below. `"steps"` (default when absent): 16 value items on the ring. |
 | `dynamicCenter` | Optional `{ childDistance, itemSpacing, childSize, gap, growth, minSize, maxSize, textRatio }` in px, mirroring the theme CSS. When set, a dynamic ring's center starts at `minSize` and grows `growth` px for each px the ring widens past `childDistance` (staying `gap` clear of the items, up to `maxSize`), the engine sets `--dynamic-center-size` on it, and the hovered item's text wraps into `size × textRatio`. |
 | `previewBackground` | CSS background for the preview tool only; the app ignores it. |
+| `slices` | Engine 2 (`engineVersion: 2`): the items are drawn as pieces of one object, cut live to each item's wedge by the dial's slice renderer (`Knobdeck/app/src/dial/overlay/slices.js`, which documents every field). Either material maps (`maps`: albedo / normal / roughness, lit per pixel with a bevel, a sunken field and joint shadows; `forge`) or painted art (`tile` / `tileHover`: one slice for a ring of `tileSpan` degrees, warped to fit). The open center gets `kd-sliced` while it's drawn, so the CSS can fall back to its own item look without it. |
 
 **What the CSS can use**
 
