@@ -8,6 +8,12 @@
   "bloom": {
     "version": "1.1.0"
   },
+  "buckler": {
+    "version": "1.0.0"
+  },
+  "cogwork": {
+    "version": "1.0.0"
+  },
   "contrast": {
     "version": "1.1.0"
   },
@@ -37,5 +43,11 @@
   },
   "studio": {
     "version": "1.1.0"
+  },
+  "vault": {
+    "version": "1.0.0"
+  },
+  "vinyl": {
+    "version": "1.0.0"
   }
 }

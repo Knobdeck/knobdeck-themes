@@ -1,0 +1,16 @@
+{
+  "colors": {
+    "accent-color": "#ff4d4d",
+    "icon-color": "#d5d9de",
+    "hub-icon-color": "#ffd1d1",
+    "text-color": "#f1f3f5",
+    "wedge-highlight-color": "rgba(255, 77, 77, 0.28)",
+    "gear-light": "#6d737b",
+    "gear-mid": "#3d4249",
+    "gear-dark": "#1c1f23",
+    "nut-light": "#555b63",
+    "nut-dark": "#24282d",
+    "cap-light": "#3a3f46",
+    "cap-dark": "#0e1012"
+  }
+}

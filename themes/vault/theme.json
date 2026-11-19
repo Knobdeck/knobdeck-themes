@@ -1,0 +1,68 @@
+{
+  "name": "Vault",
+  "author": "KnobDeck",
+  "license": "CC0-1.0",
+  "version": "1.0.0",
+  "description": "A safe door: a combination ring that turns against your pointer, a ridged knob that swings to face what you point at, and items as bolts.",
+  "engineVersion": 1,
+  "maxMenuRadius": 175,
+  "centerTextWrapWidth": 74,
+  "sliderStyle": "track",
+  "drawChildrenBelow": false,
+  "drawCenterText": true,
+  "drawSelectionWedges": false,
+  "drawWedgeSeparators": false,
+  "previewBackground": "linear-gradient(160deg, #3b4148, #121418)",
+  "presets": [
+    "Gold Bullion",
+    "Black Safe",
+    "Bank Green"
+  ],
+  "colors": {
+    "accent-color": "#3dff95",
+    "accent-ink": "#06301a",
+    "icon-color": "#2b3138",
+    "cap-icon-color": "#1b2026",
+    "text-color": "#1b2026",
+    "wedge-highlight-color": "rgba(61, 255, 149, 0.55)",
+    "index-color": "#ff3b30",
+    "number-color": "#e9edf1",
+    "steel-light": "#f1f3f5",
+    "steel-mid": "#a7afb8",
+    "steel-dark": "#59616b",
+    "bezel": "#1d2126",
+    "bezel-light": "#3a4048",
+    "cap-light": "#f7f8fa",
+    "cap-dark": "#9aa2ab"
+  },
+  "layers": [
+    {
+      "class": "face",
+      "content": "icon"
+    },
+    {
+      "class": "grip",
+      "content": "none"
+    },
+    {
+      "class": "index",
+      "content": "none"
+    },
+    {
+      "class": "ring",
+      "content": "none"
+    },
+    {
+      "class": "lit",
+      "content": "none"
+    },
+    {
+      "class": "plate",
+      "content": "none"
+    },
+    {
+      "class": "shade",
+      "content": "none"
+    }
+  ]
+}

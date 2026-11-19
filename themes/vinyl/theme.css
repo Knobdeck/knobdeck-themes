@@ -1,0 +1,434 @@
+/* Vinyl: The menu is a record: grooves that light under the item you point at, light sliding over them and a paper label spinning at 33 rpm.
+   A KnobDeck dial theme (CC0-1.0). Colours come from theme.json and presets/. */
+
+/* ── Structure: where nodes sit and how big they are in each state ── */
+
+.menu-node {
+  --ring-distance: max(var(--child-distance), var(--sibling-spacing, 10.5px) * var(--sibling-count));
+  transition: var(--menu-transition);
+
+  &.child {
+    transform: translate(calc(var(--ring-distance) * var(--dir-x)), calc(var(--ring-distance) * var(--dir-y)));
+  }
+
+  &.dragged {
+    transition: none;
+  }
+
+  .face {
+    position: absolute;
+    z-index: 1;
+    transition: var(--menu-transition), background 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  }
+
+  .icon-container {
+    opacity: 0;
+    transition: opacity 160ms ease, color 120ms ease;
+  }
+
+  &.active > .face > .icon-container,
+  &.parent > .face > .icon-container,
+  &.child > .face > .icon-container {
+    opacity: 1;
+  }
+
+  /* With a child hovered, the center shows its name instead of an icon. */
+  &.active:has(> .hovered) > .face > .icon-container {
+    opacity: 0;
+  }
+
+  &.active > .face {
+    top: calc(var(--center-size) / -2);
+    left: calc(var(--center-size) / -2);
+    width: var(--center-size);
+    height: var(--center-size);
+  }
+
+  &.parent > .face,
+  &.child > .face {
+    top: calc(var(--child-size) / -2);
+    left: calc(var(--child-size) / -2);
+    width: var(--child-size);
+    height: var(--child-size);
+  }
+
+  &.hovered.clicked > .face {
+    scale: 0.92;
+  }
+
+  .connector {
+    height: var(--connector-width);
+    top: calc(var(--connector-width) / -2);
+    transition: var(--menu-transition);
+  }
+
+  &:has(.dragged) > .connector {
+    transition: none;
+  }
+}
+
+.center-text {
+  transition: opacity 160ms ease;
+}
+
+.selection-wedges {
+  mask: radial-gradient(circle at var(--center-x) var(--center-y), #000 96px, transparent 50%);
+  background: var(--wedge-color, transparent);
+
+  &.hovered {
+    --width: calc(var(--end-angle) - var(--start-angle));
+    background: conic-gradient(
+      from var(--start-angle) at var(--center-x) var(--center-y),
+      var(--wedge-highlight-color, transparent) var(--width),
+      var(--wedge-color, transparent) var(--width)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-node,
+  .menu-node > *,
+  .menu-node > * > * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ── Look ── */
+
+.menu-node {
+  --child-distance: 116px;
+  --center-size: 96px;
+  --child-size: 46px;
+  --child-size-base: 46px;
+  --connector-width: 0px;
+  --plate-size: 318px;
+  --ease: cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  --menu-transition: all 280ms var(--ease);
+  /* Fine grooves over the vinyl, with the wider run-in and run-out bands. */
+  --grooves:
+    radial-gradient(closest-side, transparent 0 31%, rgba(0, 0, 0, 0.55) 31% 33%, transparent 33% 93%, rgba(255, 255, 255, 0.06) 93% 94%, transparent 94%),
+    repeating-radial-gradient(closest-side, var(--vinyl-groove) 0 1px, transparent 1px 3px),
+    radial-gradient(closest-side, var(--vinyl-light), var(--vinyl-color) 70%);
+
+  .face {
+    color: var(--icon-color);
+  }
+
+  .plate,
+  .sheen,
+  .label,
+  .shade {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  &.active > .plate,
+  &.active > .sheen,
+  &.active > .shade {
+    display: block;
+    top: calc(var(--plate-size) / -2);
+    left: calc(var(--plate-size) / -2);
+    width: var(--plate-size);
+    height: var(--plate-size);
+  }
+
+  &.active > .shade {
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.6), transparent);
+    translate: 0 12px;
+    scale: 1.05;
+    filter: blur(10px);
+  }
+
+  /* The record. The hovered item's groove band lights up like the stylus is on it. */
+  &.active > .plate {
+    background: var(--grooves);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+    transition: --hover-angle 160ms var(--ease);
+  }
+
+  &.active:has(> .hovered) > .plate {
+    background:
+      conic-gradient(from calc(var(--hover-angle) - 20deg), color-mix(in srgb, var(--accent-color) 22%, transparent) 0deg 40deg, transparent 40deg),
+      var(--grooves);
+  }
+
+  /* Light catching the grooves: two bright bands that follow the pointer round. */
+  &.active > .sheen {
+    background: conic-gradient(from 20deg, transparent 0deg, rgba(255, 255, 255, 0.16) 18deg, transparent 42deg 180deg, rgba(255, 255, 255, 0.12) 198deg, transparent 222deg);
+    mask: radial-gradient(closest-side, transparent 33%, #000 34%);
+    rotate: calc(var(--pointer-angle) * 0.35);
+    transition: --pointer-angle 240ms var(--ease);
+    mix-blend-mode: screen;
+  }
+
+  /* The paper label in the middle spins at 33⅓. */
+  &.active > .label {
+    display: block;
+    top: calc(var(--center-size) / -2);
+    left: calc(var(--center-size) / -2);
+    width: var(--center-size);
+    height: var(--center-size);
+    background:
+      radial-gradient(closest-side, transparent 0 80%, color-mix(in srgb, var(--label-ink) 30%, transparent) 80% 82%, transparent 82%),
+      repeating-conic-gradient(color-mix(in srgb, var(--label-ink) 14%, transparent) 0deg 3deg, transparent 3deg 30deg),
+      radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--label-color) 75%, white), var(--label-color) 60%);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+    animation: vinyl-spin 1.8s linear infinite;
+
+    /* The spindle hole; it steps aside while the label shows a name. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: calc(50% - 4px);
+      border-radius: 50%;
+      background: var(--vinyl-color);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+      transition: opacity 120ms ease;
+    }
+  }
+
+  &.active:has(> .hovered) > .label::after,
+  &.active.slider-menu > .label::after {
+    opacity: 0;
+  }
+
+  &.active > .face {
+    border-radius: 50%;
+    color: var(--label-ink);
+    background: transparent;
+  }
+
+  &.active > .face .icon-container {
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4));
+  }
+
+  /* Items: small glossy pressings with a coloured rim. */
+  &.parent > .face,
+  &.child > .face {
+    border-radius: 50%;
+    background:
+      radial-gradient(closest-side, transparent 0 80%, var(--label-color) 82% 92%, transparent 94%),
+      radial-gradient(circle at 35% 28%, #3a3a3a, #121212 70%);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  &.child.hovered > .face,
+  &.parent.hovered > .face {
+    color: var(--label-ink);
+    scale: 1.16;
+    background: radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--label-color) 70%, white), var(--label-color) 60%);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.6), 0 0 18px color-mix(in srgb, var(--label-color) 70%, transparent);
+  }
+
+  .connector {
+    background: transparent;
+  }
+}
+
+@keyframes vinyl-spin {
+  to { rotate: 360deg; }
+}
+
+.selection-wedges {
+  display: none;
+}
+
+.center-text {
+  color: var(--label-ink);
+  font-family: "Futura", "Century Gothic", "Avenir Next", "Trebuchet MS", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Sliders: a dial scale (`sliderStyle: "track"`) ──
+   A slider opens as a knob on a plate. Every value it can take is a tick on the scale; the
+   engine numbers the round ones (`major`, `data-tick`) and lights the ones up to the value
+   (`filled`). */
+
+.menu-node {
+  --scale-plate-size: 220px;
+  --scale-radius: 102px;
+  --scale-tick-length: 6px;
+  --scale-major-length: 12px;
+  --scale-tick-width: 1.5px;
+  --scale-major-width: 2px;
+  --scale-label-radius: 77px;
+  --scale-pointer-radius: calc(var(--center-size) / 2 - 5px);
+  --scale-pointer-length: 12px;
+  --scale-pointer-width: 3px;
+  --scale-tick-color: color-mix(in srgb, var(--icon-color) 36%, transparent);
+  --scale-lit-color: var(--accent-color);
+  --scale-lit-glow: 0 0 5px var(--accent-color);
+  --scale-label-color: color-mix(in srgb, var(--icon-color) 72%, transparent);
+  --scale-label-lit-color: var(--text-color);
+  --scale-font: 600 9px/1 "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --scale-value-color: var(--text-color);
+  --scale-value-font: 600 16px/1 "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.menu-node.slider-menu {
+  /* The plate under the scale (a div the engine adds). */
+  & > .kd-scale-plate {
+    top: calc(var(--scale-plate-size) / -2);
+    left: calc(var(--scale-plate-size) / -2);
+    width: var(--scale-plate-size);
+    height: var(--scale-plate-size);
+    border-radius: 50%;
+    opacity: 0;
+    scale: 0.6;
+    transition: var(--menu-transition);
+  }
+
+  &.active > .kd-scale-plate {
+    opacity: 1;
+    scale: 1;
+  }
+
+  /* The pointer keeps up with the value, whatever the menu's own easing. */
+  &.active {
+    transition: var(--menu-transition), --slider-fill 90ms linear;
+  }
+
+  /* A value stop is a tick: it grows inwards from the scale's radius. */
+  &.active > .slider-step.child {
+    --tick-length: var(--scale-tick-length);
+    --tick-width: var(--scale-tick-width);
+    transform: none;
+    scale: none;
+    transition: opacity 160ms ease;
+
+    & > * {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: calc(var(--tick-width) / -2);
+      width: var(--tick-width);
+      height: var(--tick-length);
+      border-radius: var(--scale-tick-cap, 1px);
+      background: var(--scale-tick-color);
+      box-shadow: var(--scale-tick-shadow, none);
+      transform-origin: 50% 0;
+      transform: rotate(var(--angle)) translateY(calc(-1 * var(--scale-radius)));
+    }
+
+    &.major {
+      --tick-length: var(--scale-major-length);
+      --tick-width: var(--scale-major-width);
+    }
+
+    &.hovered {
+      --tick-length: calc(var(--scale-major-length) + 3px);
+      --tick-width: var(--scale-major-width);
+    }
+
+    /* Lit up to the value; `current` stays lit while another value is hovered. */
+    &.filled::before,
+    &.current::before,
+    &.hovered::before {
+      background: var(--scale-lit-color);
+      box-shadow: var(--scale-lit-glow, var(--scale-tick-shadow, none));
+    }
+
+    /* The number of a major tick. */
+    &.major::after {
+      content: attr(data-tick);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(
+        calc(var(--dir-x) * var(--scale-label-radius) - 50%),
+        calc(var(--dir-y) * var(--scale-label-radius) - 50%)
+      );
+      color: var(--scale-label-color);
+      font: var(--scale-font);
+      font-variant-numeric: tabular-nums;
+      text-shadow: var(--scale-label-shadow, none);
+      white-space: nowrap;
+    }
+
+    &.major.filled::after,
+    &.major.hovered::after {
+      color: var(--scale-label-lit-color);
+    }
+  }
+
+  /* The pointer on the knob. */
+  &.active::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: calc(var(--scale-pointer-width) / -2);
+    width: var(--scale-pointer-width);
+    height: var(--scale-pointer-length);
+    border-radius: var(--scale-pointer-width);
+    background: var(--scale-pointer-color);
+    box-shadow: var(--scale-pointer-glow, none);
+    transform-origin: 50% 0;
+    transform: rotate(calc(var(--slider-start-angle) + var(--slider-fill))) translateY(calc(-1 * var(--scale-pointer-radius)));
+    pointer-events: none;
+  }
+
+  /* The knob reads out the value: the hovered one, else the live one. */
+  &.active > .face > .icon-container {
+    opacity: 0;
+  }
+
+  &.active::before {
+    content: var(--slider-readout, var(--slider-value, ""));
+    position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    color: var(--scale-value-color);
+    font: var(--scale-value-font);
+    font-variant-numeric: tabular-nums;
+    text-shadow: var(--scale-value-shadow, none);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* Apps up to 0.3.2 print the hovered value as center text instead. */
+  &.active.slider-previewing:not(.kd-scale)::before {
+    opacity: 0;
+  }
+}
+
+.menu-node {
+  --scale-tick-color: rgba(255, 255, 255, 0.28);
+  --scale-label-color: rgba(255, 255, 255, 0.6);
+  --scale-label-lit-color: #fff;
+  --scale-lit-color: var(--label-color);
+  --scale-lit-glow: 0 0 5px var(--label-color);
+  --scale-pointer-color: var(--label-ink);
+  --scale-value-color: var(--label-ink);
+  --scale-font: 800 9px/1 "Futura", "Century Gothic", "Avenir Next", sans-serif;
+  --scale-value-font: 800 17px/1 "Futura", "Century Gothic", "Avenir Next", sans-serif;
+}
+
+.menu-node.slider-menu {
+  /* The slider opens as a smaller record. */
+  & > .kd-scale-plate {
+    background: var(--grooves);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+  }
+
+  &.active > .plate,
+  &.active > .sheen,
+  &.active > .shade {
+    display: none;
+  }
+
+  &.active > .label {
+    animation: none;
+  }
+}

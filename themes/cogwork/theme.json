@@ -1,0 +1,53 @@
+{
+  "name": "Cogwork",
+  "author": "KnobDeck",
+  "license": "CC0-1.0",
+  "version": "1.0.0",
+  "description": "The whole menu is a brass gear that turns with your pointer, a hub gear meshing the other way, and items bolted on as hex nuts.",
+  "engineVersion": 1,
+  "maxMenuRadius": 175,
+  "centerTextWrapWidth": 66,
+  "sliderStyle": "track",
+  "drawChildrenBelow": false,
+  "drawCenterText": true,
+  "drawSelectionWedges": false,
+  "drawWedgeSeparators": false,
+  "previewBackground": "radial-gradient(circle at 50% 35%, #3b3128, #14110e 72%)",
+  "presets": [
+    "Steel",
+    "Copper",
+    "Gunmetal"
+  ],
+  "colors": {
+    "accent-color": "#ffb547",
+    "icon-color": "#3a2a14",
+    "hub-icon-color": "#fff4dc",
+    "text-color": "#fff1d6",
+    "wedge-highlight-color": "rgba(255, 196, 92, 0.32)",
+    "gear-light": "#f3d58c",
+    "gear-mid": "#c99a45",
+    "gear-dark": "#7a5520",
+    "nut-light": "#efe3c4",
+    "nut-dark": "#a88a52",
+    "cap-light": "#5a4a36",
+    "cap-dark": "#1f1912"
+  },
+  "layers": [
+    {
+      "class": "face",
+      "content": "icon"
+    },
+    {
+      "class": "hub",
+      "content": "none"
+    },
+    {
+      "class": "plate",
+      "content": "none"
+    },
+    {
+      "class": "shade",
+      "content": "none"
+    }
+  ]
+}

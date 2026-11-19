@@ -1,0 +1,14 @@
+{
+  "colors": {
+    "wood-1": "#2a2826",
+    "wood-2": "#3a3734",
+    "wood-3": "#201e1c",
+    "iron-light": "#b8bdc2",
+    "iron-mid": "#6b7076",
+    "iron-dark": "#2a2d30",
+    "accent-color": "#7fd8ff",
+    "accent-ink": "#06232f",
+    "badge-light": "#3a3d41",
+    "badge-dark": "#1a1c1e"
+  }
+}
