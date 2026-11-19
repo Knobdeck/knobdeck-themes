@@ -93,8 +93,9 @@ def main():
     # 2. The centre piece.
     cbox = 2 * (CENTER_R + 8) * s                      # 512
     frame("center", rx, by, cbox, cbox, "2  CENTRE PIECE (r=56)",
-          ["The emblem in the middle. The hovered item's",
-           "name is written over its inner disc (r<40):", "keep that area calm."])
+          ["A frame round a PLAIN middle (r<40, dashed):",
+           "the profile's icon and the hovered item's",
+           "name show there. Decorate the rim only."])
     ccx, ccy = rx + cbox / 2, by + cbox / 2
     outline_circle(ccx, ccy, CENTER_R * s, 5)
     outline_circle(ccx, ccy, 40 * s, 2, dash=True)
