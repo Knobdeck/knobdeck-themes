@@ -2,7 +2,7 @@
   "name": "Forge",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A rusted iron wheel set with carved stone slabs: every item is a slab cut to its slot, its rune glowing, the hovered one lifting out of the stone.",
   "engineVersion": 2,
   "maxMenuRadius": 200,
@@ -62,6 +62,7 @@
       0.62,
       0.75
     ],
-    "glow": "accent-color"
+    "glow": "accent-color",
+    "ringSpacing": 9.6
   }
 }
