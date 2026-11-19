@@ -390,32 +390,34 @@ def plate(coll):
 
 
 def medallion(coll):
-    """The center: an iron boss with a raised eight-point star and an ember set in the middle."""
+    """The center: an iron boss whose eight star points sit round its rim, framing a plain recessed
+    dish in the middle, where the dial shows the profile's icon (and the hovered item's name)."""
     m = cylinder(coll, MEDALLION_R, 0.12, 0.06, verts=192)
-    bpy.ops.mesh.primitive_torus_add(major_radius=MEDALLION_R - 0.07, minor_radius=0.012, major_segments=192, minor_segments=12, location=(0, 0, 0.12))
+    # The dish: a shallow recess r < 0.36 with a rounded lip.
+    boolean(m, cylinder(coll, 0.36, 0.2, 0.12 + 0.1 - 0.035, verts=192))
+    bpy.ops.mesh.primitive_torus_add(major_radius=MEDALLION_R - 0.05, minor_radius=0.010, major_segments=192, minor_segments=12, location=(0, 0, 0.12))
     boolean(m, link(bpy.context.active_object, coll))
-    # The star: eight long points and eight short ones, raised.
-    bm = bmesh.new()
-    pts = []
-    for i in range(16):
-        a = 2 * math.pi * i / 16
-        r = 0.44 if i % 2 == 0 else 0.20
-        r2 = 0.10
-        pts.append((r * math.sin(a), r * math.cos(a)))
-        b = a + math.pi / 16
-        pts.append((r2 * 1.6 * math.sin(b), r2 * 1.6 * math.cos(b)))
-    face = bm.faces.new([bm.verts.new((x, y, 0.10)) for x, y in pts])
-    ext = bmesh.ops.extrude_face_region(bm, geom=[face])
-    bmesh.ops.translate(bm, vec=(0, 0, 0.06), verts=[v for v in ext["geom"] if isinstance(v, bmesh.types.BMVert)])
-    star = mesh_obj("star", bm, coll)
-    smooth(star, 0.008, 2, 30)
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.085, segments=48, ring_count=24, location=(0, 0, 0.17))
-    gem = link(bpy.context.active_object, coll)
-    gem.scale.z = 0.6
-    for p in gem.data.polygons:
-        p.use_smooth = True
+    # Eight star points on the rim, pointing out, between the dish and the edge.
+    star = None
+    for i in range(8):
+        a = 2 * math.pi * i / 8
+        bm = bmesh.new()
+        tip, base, w = 0.53, 0.37, 0.055
+        pts = [(tip * math.sin(a), tip * math.cos(a)),
+               (base * math.sin(a) + w * math.cos(a), base * math.cos(a) - w * math.sin(a)),
+               ((base - 0.02) * math.sin(a), (base - 0.02) * math.cos(a)),
+               (base * math.sin(a) - w * math.cos(a), base * math.cos(a) + w * math.sin(a))]
+        face = bm.faces.new([bm.verts.new((x, y, 0.11)) for x, y in pts])
+        ext = bmesh.ops.extrude_face_region(bm, geom=[face])
+        bmesh.ops.translate(bm, vec=(0, 0, 0.04), verts=[v for v in ext["geom"] if isinstance(v, bmesh.types.BMVert)])
+        point = mesh_obj(f"point{i}", bm, coll)
+        if star is None:
+            star = point
+        else:
+            boolean(star, point, "UNION")
+    smooth(star, 0.006, 2, 30)
     smooth(m, 0.012)
-    return m, star, gem
+    return m, star
 
 
 def tile(coll, n):
@@ -542,10 +544,9 @@ if "plate" in ONLY:
 
 if "medallion" in ONLY:
     c = collection("medallion")
-    m, star, gem = medallion(c)
+    m, star = medallion(c)
     assign(m, rusted_iron("iron2", seed=4.0))
     assign(star, bronze("bronze2", seed=5.0))
-    assign(gem, glow)
     shadow_catcher(c)
     jobs.append(("medallion", c, 2 * MEDALLION_R + 0.08, 384, "key"))
 

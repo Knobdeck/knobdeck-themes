@@ -143,14 +143,17 @@
     animation: forge-in 380ms var(--ease) both;
   }
 
-  /* The medallion is the center; the hovered item's name is struck over it. */
+  /* The medallion is the center: the profile's (or folder's) icon glows in its dish, and the
+     hovered item's name takes its place. */
   &.active > .face {
+    color: var(--rune-hot);
     background: url("medallion.webp") center / 120px 120px no-repeat;
     filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
   }
 
   &.active > .face > .icon-container {
-    opacity: 0 !important;
+    scale: 0.62;
+    filter: drop-shadow(0 0 3px var(--accent-color)) drop-shadow(0 0 10px var(--accent-color));
   }
 
   /* Items: the runes on the slabs, glowing in turn blue, orange and gold. */
@@ -212,9 +215,9 @@
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.95), 0 1px 2px #000;
 }
 
-/* A name over the medallion: the medallion steps back so the text reads. */
+/* A name in the dish: the medallion dims a little so the text reads. */
 .menu-node.active:has(> .hovered) > .face {
-  filter: brightness(0.5) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+  filter: brightness(0.75) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
 }
 
 /* ── Sliders: a dial scale (`sliderStyle: "track"`) ──
