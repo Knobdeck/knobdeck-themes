@@ -17,15 +17,11 @@ Dial themes for KnobDeck, all original. The app ships three built-ins (**Auto**,
 | `aurora` | Dark glass with a turning aurora glow | Solar, Ocean, Rose |
 | `studio` | Creator console with an on-air light | Violet, Teal, Gold |
 | `contrast` | Accessibility: bold outlines, large targets, almost no motion | Black on White, White on Blue |
-| `cogwork` | The menu is a brass gear that turns with the pointer, a hub gear meshing the other way, hex-nut items | Steel, Copper, Gunmetal |
-| `vinyl` | The menu is a record: grooves light under the pointed item, a label spinning at 33 rpm | Blue Pressing, Gold Record, Mint |
-| `vault` | A safe door: a combination ring turning against the pointer, a ridged knob that faces the pointed item, bolt items | Gold Bullion, Black Safe, Bank Green |
-| `buckler` | A round plank shield: iron rim and studs, an iron boss, badges on the wood, leaning towards the pointer | Raider, Royal, Forest, Blackiron |
 
 - `themes/<id>/`: `theme.json`, `theme.css`, optional `presets/<Name>.json` and assets the CSS links
-  relatively (`url("dial-ring.svg")` in `vault`).
-- Whole-menu art (`cogwork`, `vinyl`, `vault`, `buckler`) is a layer on the open center sized past the
-  ring, with `drawChildrenBelow: false` so the items sit on top of it.
+  relatively (`url("plate.webp")`).
+- Whole-menu art is a layer on the open center sized past the ring, with `drawChildrenBelow: false` so
+  the items sit on top of it.
 - `previews/<id>.gif`: the preview shown in the app before download. It isn't a release asset: the
   registry links it by raw GitHub URL, so a new GIF shows up without a release.
 
