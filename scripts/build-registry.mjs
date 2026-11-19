@@ -44,6 +44,8 @@ const themes = ids.map((id) => {
     name: desc.name ?? id,
     author: desc.author ?? "",
     version,
+    // The dial engine the theme needs (2 = slices); apps that run an older one don't offer it.
+    ...(desc.engineVersion > 1 ? { engine: desc.engineVersion } : {}),
     zipUrl,
     sha256: createHash("sha256").update(readFileSync(zip)).digest("hex"),
     preview,

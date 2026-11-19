@@ -14,6 +14,9 @@
   "ember": {
     "version": "1.1.0"
   },
+  "forge": {
+    "version": "1.0.0"
+  },
   "frost": {
     "version": "1.1.0"
   },

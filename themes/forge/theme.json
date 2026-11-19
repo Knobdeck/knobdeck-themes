@@ -1,0 +1,67 @@
+{
+  "name": "Forge",
+  "author": "KnobDeck",
+  "license": "CC0-1.0",
+  "version": "1.0.0",
+  "description": "A rusted iron wheel set with carved stone slabs: every item is a slab cut to its slot, its rune glowing, the hovered one lifting out of the stone.",
+  "engineVersion": 2,
+  "maxMenuRadius": 200,
+  "centerTextWrapWidth": 84,
+  "sliderStyle": "track",
+  "drawChildrenBelow": false,
+  "drawCenterText": true,
+  "drawSelectionWedges": false,
+  "drawWedgeSeparators": false,
+  "previewBackground": "radial-gradient(circle at 50% 35%, #34302b, #0f0d0b 72%)",
+  "presets": [
+    "Frost",
+    "Hellfire",
+    "Venom"
+  ],
+  "colors": {
+    "accent-color": "#ff8a2a",
+    "rune-1": "#4fb3ff",
+    "rune-2": "#ff8a2a",
+    "rune-3": "#ffc23a",
+    "rune-hot": "#fff1c8",
+    "text-color": "#ffe9c8"
+  },
+  "layers": [
+    {
+      "class": "face",
+      "content": "icon"
+    },
+    {
+      "class": "plate",
+      "content": "none"
+    },
+    {
+      "class": "shade",
+      "content": "none"
+    }
+  ],
+  "slices": {
+    "inner": 64,
+    "outer": 128,
+    "gap": 4.5,
+    "corner": 4,
+    "bevel": 5.5,
+    "height": 9,
+    "border": 7,
+    "field": 2.6,
+    "lift": 6,
+    "maps": {
+      "albedo": "stone-albedo.webp",
+      "normal": "stone-normal.webp",
+      "rough": "stone-rough.webp"
+    },
+    "mapSpan": 272,
+    "brightness": 1.4,
+    "light": [
+      -0.55,
+      0.62,
+      0.75
+    ],
+    "glow": "accent-color"
+  }
+}
