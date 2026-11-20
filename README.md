@@ -18,6 +18,11 @@ Dial themes for KnobDeck, all original. The app ships three built-ins (**Auto**,
 | `studio` | Creator console with an on-air light | Violet, Teal, Gold |
 | `contrast` | Accessibility: bold outlines, large targets, almost no motion | Black on White, White on Blue |
 | `forge` | A rusted iron wheel set with carved stone slabs: each item is a slab cut to its slot, its rune glowing (engine 2) | Frost, Hellfire, Venom |
+| `neon-bay` | A chrome-and-neon ring over a sunset bay: each item is a smoked-glass panel, the hovered one lit in pink neon (engine 2, painted on the theme blueprint) | Teal Night, Ultraviolet |
+| `halo` | A quiet dark platter with a watch-face scale: gray slices, crisp edges, a blue bead beside the item you point at (engine 2) | Graphite, Orange, Pink, Green |
+| `lucid` | Liquid glass: clear panels with bright rims on a faint smoked disc, the hovered one filling with light (engine 2) | Clear, Dusk, Deep |
+| `pane` | A layered dark surface with small-radius tiles and hairline strokes; the hovered item gets an accent pill (engine 2) | Orange, Purple, Green |
+| `void` | Pure black, drawn only in hairlines and light; every move on a spring, folders pour out of the centre (engine 2) | Ice, Ember, Violet |
 
 - `themes/<id>/`: `theme.json`, `theme.css`, optional `presets/<Name>.json` and assets the CSS links
   relatively (`url("plate.webp")`).
