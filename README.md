@@ -83,12 +83,10 @@ The dial engine is `Knobdeck/app/src/dial/overlay/` (Kando's theme format, engin
 
 **Checklist before shipping a theme**
 
-Run `node scripts/preview/preview.mjs check <id>` and `presets <id>` and look at `out/check/`:
-idle and hovered, an open submenu, 4 / 8 / 12 items, long labels, an open slider (at rest, with
-a value hovered, and a coarse 0–10 one), every preset (menu and slider). Then make the GIF
-with `node scripts/preview/preview.mjs gif <id>`. `serve <id>` gives a page to try it with the mouse.
-The tool needs this workspace layout (`../Knobdeck` with `npm install` done in `app/`,
-`../knobdeck-launch-video` for Playwright), ffmpeg, and a Chromium-based browser (`BROWSER=...`).
+Render it in the real dial engine and look at every state: idle and hovered, an open submenu,
+4 / 8 / 12 items, long labels, an open slider (at rest, with a value hovered, and a coarse 0–10 one),
+and every preset (menu and slider). Then make its preview GIF (`previews/<id>.gif`). The maintainers'
+preview and art tools live outside this repo; a contributor can send the theme and we render it.
 
 Check the registry build locally: `node scripts/build-registry.mjs test` (needs `zip`), output in `out/`.
 
