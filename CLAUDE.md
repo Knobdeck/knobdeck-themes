@@ -20,5 +20,11 @@ the `knobdeck-registry` catalog (a `theme-released` dispatch) to rebuild, so the
 ## Rule 3: every theme is original and checked
 
 Ship only KnobDeck's own themes (CC0-1.0, `"author": "KnobDeck"` unless a contributor made it). Before
-shipping, render it with `node scripts/preview/preview.mjs check <id>` and `presets <id>` and look at
-every state; regenerate the GIF with `gif <id>`. README.md lists what the theme CSS can use.
+shipping, render it with `node preview/preview.mjs check <id>` and `presets <id>` (run from
+`../knobdeck-theme-tools`) and look at every state; regenerate the GIF with `gif <id>`. README.md lists what the theme CSS can use.
+
+## Rule 4: this repo holds themes only
+
+Only what ships or what CI needs lives here: `themes/`, `previews/`, `index.json`, `scripts/build-registry.mjs`,
+the workflow and the docs. Making-of tools (preview renderer, blueprint and cutter, Blender scripts, reference
+images) live in the local workspace folder `../knobdeck-theme-tools`, never in this repo.
