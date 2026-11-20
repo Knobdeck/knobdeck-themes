@@ -1,0 +1,58 @@
+{
+  "name": "Lucid",
+  "author": "KnobDeck",
+  "license": "CC0-1.0",
+  "version": "1.0.0",
+  "description": "Liquid glass: clear panels with bright rims on a faint smoked disc, the one you point at filling with light.",
+  "engineVersion": 2,
+  "maxMenuRadius": 170,
+  "centerTextWrapWidth": 76,
+  "sliderStyle": "track",
+  "drawChildrenBelow": false,
+  "drawCenterText": true,
+  "drawSelectionWedges": false,
+  "drawWedgeSeparators": false,
+  "previewBackground": "linear-gradient(135deg, #3a6ea5, #8a5aa8 55%, #d98b6a)",
+  "presets": [
+    "Clear",
+    "Dusk",
+    "Deep"
+  ],
+  "colors": {
+    "accent-color": "#9fd4ff",
+    "smoke": "rgba(18, 20, 28, 0.42)",
+    "icon-color": "rgba(255, 255, 255, 0.92)",
+    "icon-hot": "#ffffff",
+    "text-color": "#ffffff"
+  },
+  "layers": [
+    {
+      "class": "face",
+      "content": "icon"
+    },
+    {
+      "class": "plate",
+      "content": "none"
+    },
+    {
+      "class": "shade",
+      "content": "none"
+    }
+  ],
+  "slices": {
+    "inner": 64,
+    "outer": 128,
+    "tile": "glass.webp",
+    "tileHover": "glass-hover.webp",
+    "tileSpan": 45,
+    "tileFrame": 400,
+    "lift": 1,
+    "glow": "accent-color",
+    "light": [
+      0,
+      1,
+      0.6
+    ],
+    "ringSpacing": 9.6
+  }
+}
