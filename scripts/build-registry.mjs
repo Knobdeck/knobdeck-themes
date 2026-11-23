@@ -20,12 +20,15 @@ const prev = prevPath && existsSync(prevPath) ? JSON.parse(readFileSync(prevPath
 rmSync("out", { recursive: true, force: true });
 mkdirSync("out");
 
-const PHONE_FILES = ["phone.json", "phone-bg.jpg", "phone-bg.png", "phone-bg.webp"];
+// The phone files stay out of the dial zip (zip -x patterns).
+const PHONE_FILES = ["phone.json", "phone-bg*"];
+const PHONE_IMAGE = /^phone-bg(-[a-z0-9-]+)?\.(jpg|png|webp)$/;
 const HEX = /^#[0-9a-f]{6}$/i;
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 
 /// The phone counterpart (themes/<id>/phone.json, see README "Phone themes") as release assets:
-/// the JSON gets the theme's name, description and version, and its image becomes an absolute URL.
+/// the JSON gets the theme's name, description and version, and every image (the theme's and each
+/// preset's) becomes an absolute URL with its `imageSha256`.
 /// Built from source every release (same source, same bytes), so its checksum only changes with it.
 function buildPhone(id, desc, version) {
   const path = `themes/${id}/phone.json`;
@@ -40,21 +43,23 @@ function buildPhone(id, desc, version) {
   for (const k of ["bg", "text", "accent"]) if (!HEX.test(phone.colors[k])) throw new Error(`${where}: colors.${k} must be #rrggbb`);
   if (!HEX.test(phone.cell?.icon ?? "")) throw new Error(`${where}: cell.icon must be #rrggbb`);
   if (typeof phone.background?.base !== "string") throw new Error(`${where}: background.base missing`);
+  // Only the app's built-ins are plain: every theme here brings background art.
+  if (!phone.background.image) throw new Error(`${where}: background.image missing (every theme has background art)`);
   const names = desc.presets ?? [];
   const keys = Object.keys(phone.presets ?? {});
   for (const n of names) if (!keys.includes(n)) throw new Error(`${where}: no preset "${n}" (theme.json has it)`);
   for (const n of keys) if (!names.includes(n)) throw new Error(`${where}: preset "${n}" is not in theme.json`);
 
-  const background = { ...phone.background };
-  if (background.image) {
-    const ext = background.image.split(".").pop();
-    if (!PHONE_FILES.includes(`phone-bg.${ext}`) || background.image !== `phone-bg.${ext}`) throw new Error(`${where}: background.image must be phone-bg.jpg|png|webp`);
-    const img = readFileSync(`themes/${id}/${background.image}`);
-    copyFileSync(`themes/${id}/${background.image}`, `out/${id}.phone-bg.${ext}`);
-    background.image = `${REPO}/releases/download/${tag}/${id}.phone-bg.${ext}`;
-    background.imageSha256 = sha256(img);
-  }
-  const out = { id, name: desc.name ?? id, description: desc.description ?? "", version, ...phone, background };
+  const publishImage = (bg, owner) => {
+    if (!bg?.image) return bg;
+    if (!PHONE_IMAGE.test(bg.image)) throw new Error(`${where}: ${owner} image must be phone-bg[-<name>].jpg|png|webp`);
+    const img = readFileSync(`themes/${id}/${bg.image}`);
+    copyFileSync(`themes/${id}/${bg.image}`, `out/${id}.${bg.image}`);
+    return { ...bg, image: `${REPO}/releases/download/${tag}/${id}.${bg.image}`, imageSha256: sha256(img) };
+  };
+  const background = publishImage(phone.background, "background");
+  const presets = Object.fromEntries(Object.entries(phone.presets ?? {}).map(([n, p]) => [n, p.background ? { ...p, background: publishImage(p.background, `preset "${n}"`) } : p]));
+  const out = { id, name: desc.name ?? id, description: desc.description ?? "", version, ...phone, background, presets };
   const text = JSON.stringify(out, null, 2) + "\n";
   writeFileSync(`out/${id}.phone.json`, text);
   return { url: `${REPO}/releases/download/${tag}/${id}.phone.json`, sha256: sha256(Buffer.from(text)) };

@@ -42,7 +42,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "image": "phone-bg.jpg"
   },
   "presets": {
     "Gold": {

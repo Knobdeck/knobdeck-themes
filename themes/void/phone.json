@@ -29,7 +29,8 @@
   },
   "background": {
     "base": "#000000",
-    "layers": []
+    "layers": [],
+    "image": "phone-bg.jpg"
   },
   "presets": {
     "Ice": {

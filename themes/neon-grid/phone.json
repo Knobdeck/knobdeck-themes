@@ -90,7 +90,7 @@
         "pressed": "#3d7bff"
       },
       "background": {
-        "image": null,
+        "image": "phone-bg-laser.jpg",
         "base": "#0a0620",
         "layers": [
           {
@@ -150,7 +150,7 @@
         "pressed": "#2ee6d6"
       },
       "background": {
-        "image": null,
+        "image": "phone-bg-miami.jpg",
         "base": "#16052b",
         "layers": [
           {
@@ -210,7 +210,7 @@
         "pressed": "#ff00e6"
       },
       "background": {
-        "image": null,
+        "image": "phone-bg-toxic.jpg",
         "base": "#061a0e",
         "layers": [
           {

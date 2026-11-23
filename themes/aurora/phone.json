@@ -110,7 +110,7 @@
         "sliderFill": "#00c6ff"
       },
       "background": {
-        "image": null,
+        "image": "phone-bg-ocean.jpg",
         "layers": [
           {
             "type": "radial",
@@ -193,7 +193,7 @@
         "sliderFill": "#ff9a9e"
       },
       "background": {
-        "image": null,
+        "image": "phone-bg-rose.jpg",
         "layers": [
           {
             "type": "radial",
@@ -276,7 +276,7 @@
         "sliderFill": "#ffb347"
       },
       "background": {
-        "image": null,
+        "image": "phone-bg-solar.jpg",
         "layers": [
           {
             "type": "radial",

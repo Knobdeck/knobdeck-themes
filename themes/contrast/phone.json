@@ -24,7 +24,8 @@
   },
   "background": {
     "base": "#000000",
-    "layers": []
+    "layers": [],
+    "image": "phone-bg.jpg"
   },
   "presets": {
     "Black on White": {
@@ -49,7 +50,8 @@
         "pressed": "rgba(0,0,0,0.2)"
       },
       "background": {
-        "base": "#ffffff"
+        "base": "#ffffff",
+        "image": "phone-bg-black-on-white.jpg"
       }
     },
     "White on Blue": {
@@ -73,7 +75,8 @@
         "pressed": "rgba(255,255,255,0.3)"
       },
       "background": {
-        "base": "#0033a0"
+        "base": "#0033a0",
+        "image": "phone-bg-white-on-blue.jpg"
       }
     }
   }

@@ -26,7 +26,7 @@ app has its own copies); everything here is downloaded from the Themes page.
 | `void` | Pure black, drawn only in hairlines and light; every move on a spring, folders pour out of the centre (engine 2) | Ice, Ember, Violet |
 
 - `themes/<id>/`: `theme.json`, `theme.css`, optional `presets/<Name>.json` and assets the CSS links
-  relatively (`url("plate.webp")`), plus the phone counterpart `phone.json` and optional `phone-bg.jpg`
+  relatively (`url("plate.webp")`), plus the phone counterpart `phone.json` and its `phone-bg*.jpg` art
   (see "Phone themes"; both stay out of the dial zip).
 - Whole-menu art is a layer on the open center sized past the ring, with `drawChildrenBelow: false` so
   the items sit on top of it.
@@ -34,7 +34,7 @@ app has its own copies); everything here is downloaded from the Themes page.
   registry links it by raw GitHub URL, so a new GIF shows up without a release.
 
 Pushing to `master` runs the **release** workflow: it zips every theme and publishes a GitHub Release
-with `<id>.zip`, `<id>.phone.json` (+ `<id>.phone-bg.jpg` when the theme has one) and a `registry.json`
+with `<id>.zip`, `<id>.phone.json`, its images (`<id>.phone-bg[-<preset>].jpg`) and a `registry.json`
 (id, name, author, version, zipUrl, sha256, preview, phone: { url, sha256 }). Once the release
 exists it sends a `theme-released` dispatch to the `knobdeck-registry` catalog, which rebuilds and serves it (skipped
 until the catalog GitHub App is configured: `CATALOG_APP_ID` variable, `CATALOG_APP_PRIVATE_KEY` secret).
@@ -92,8 +92,11 @@ The dial engine is `Knobdeck/app/src/dial/overlay/` (Kando's theme format, engin
 ## Phone themes
 
 The phone app has no CSS: its theme is colours, a cell look and a backdrop. Every theme here has
-`themes/<id>/phone.json` (the release adds `id`, `name`, `description`, `version` and turns the image
-into a release URL with `imageSha256`). Colours that get an opacity applied must be `#rrggbb`
+`themes/<id>/phone.json` and its art: `phone-bg.jpg`, plus `phone-bg-<preset>.jpg` for each preset
+that changes the colours (the release adds `id`, `name`, `description`, `version` and turns every image
+into a release URL with `imageSha256`; the phone downloads only the one it shows). Every theme has
+background art; only the app's built-ins (Midnight, Daylight) are plain. The art is drawn by
+`knobdeck-theme-tools/phone/theme-backgrounds.py`. Colours that get an opacity applied must be `#rrggbb`
 (`colors.bg`, `text`, `accent`, `onBackground`, `cell.icon`); the others may be any CSS colour.
 
 ```json
@@ -106,7 +109,7 @@ into a release URL with `imageSha256`). Colours that get an opacity applied must
             "label?", "pressed?", "sliderFill?", "sliderThumb?", "font?": "mono",
             "weight?", "uppercase?", "extra?": { "borderRightWidth": 4 }, "blur?": "light|dark",
             "radius?": { "factor", "min", "max" } },
-  "background": { "base": "#000000", "image?": "phone-bg.jpg",
+  "background": { "base": "#000000", "image": "phone-bg.jpg",
                   "layers": [{ "type": "linear", "angle": 160, "stops": [[0, "#2e3036"], [1, "#111215", 1]] },
                              { "type": "radial", "cx": 0.5, "cy": 0, "r": 0.9, "stops": [[0, "#6ce39a", 0.16]] }],
                   "pattern?": { "type": "scanlines|grid|dots", "color": "#000000", "opacity": 0.35 } },
@@ -116,13 +119,13 @@ into a release URL with `imageSha256`). Colours that get an opacity applied must
 
 - `onBackground`: text straight on the backdrop (header, page dots); `line`: hairlines. `cell.radius`:
   the corner is `factor × cell size`, clamped to `min`..`max` px.
-- The backdrop is drawn base colour → image (cover, 1080×2340 or so, JPEG under ~200 KB, under a light
-  scrim in `colors.bg`) or, without an image, the gradient layers → pattern. Keep the layers even with an
-  image: they show while the image loads and for presets that drop it. Stops are
+- The backdrop is the base colour, then the image (cover, 1080×2340, JPEG under ~250 KB, under a light
+  scrim in `colors.bg`). Without an image (still downloading) the gradient layers and the pattern show
+  instead, so keep them close to the image's colours. Stops are
   `[offset 0..1, colour, opacity = 1]`, angles CSS-style (0 = up).
 - `presets` has one entry for every name in theme.json's `presets` (CI checks), merged over the theme
-  when the PC picks that preset. `"image": null` in a preset's `background` drops the image (a preset
-  that changes the hue usually should).
+  when the PC picks that preset. A preset that changes the colours brings its own
+  `"background": { "image": "phone-bg-<preset>.jpg" }`.
 
 **Checklist before shipping a theme**
 

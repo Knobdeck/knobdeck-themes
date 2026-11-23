@@ -51,7 +51,8 @@
       "type": "scanlines",
       "color": "#000000",
       "opacity": 0.35
-    }
+    },
+    "image": "phone-bg.jpg"
   },
   "presets": {
     "Amber": {
@@ -87,7 +88,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-amber.jpg"
       }
     },
     "Cyan": {
@@ -123,7 +125,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-cyan.jpg"
       }
     },
     "White": {
@@ -159,7 +162,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-white.jpg"
       }
     }
   }

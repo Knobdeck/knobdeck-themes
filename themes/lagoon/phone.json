@@ -76,7 +76,6 @@
         "sliderFill": "#7cc4ff"
       },
       "background": {
-        "image": null,
         "layers": [
           {
             "type": "linear",
@@ -121,7 +120,6 @@
         "sliderFill": "#ffc266"
       },
       "background": {
-        "image": null,
         "layers": [
           {
             "type": "linear",
@@ -166,7 +164,6 @@
         "sliderFill": "#ff8ab4"
       },
       "background": {
-        "image": null,
         "layers": [
           {
             "type": "linear",
@@ -211,7 +208,6 @@
         "sliderFill": "#b6a1ff"
       },
       "background": {
-        "image": null,
         "layers": [
           {
             "type": "linear",

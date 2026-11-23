@@ -14,8 +14,8 @@ Put the same version in `index.json`. CI fails if `index.json` and `theme.json` 
 rebuilds a theme only when its `index.json` version differs from the previous release's `registry.json`; any other
 theme's zip is copied over from that release unchanged. So without the bump, your change is not published.
 
-New theme: add `themes/<id>/` (with its `phone.json`, see README "Phone themes"), `previews/<id>.gif` and
-an `index.json` entry. A change to `phone.json` or `phone-bg.*` is a change to the theme: bump it too. The release workflow then tells
+New theme: add `themes/<id>/` (with its `phone.json` and background art, see README "Phone themes"), `previews/<id>.gif` and
+an `index.json` entry. A change to `phone.json` or `phone-bg*` is a change to the theme: bump it too. The release workflow then tells
 the `knobdeck-registry` catalog (a `theme-released` dispatch) to rebuild, so the app sees it without a manual step.
 
 ## Rule 3: every theme is original and checked
