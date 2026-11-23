@@ -48,7 +48,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "image": "phone-bg.jpg"
   },
   "presets": {
     "Ice": {
@@ -79,7 +80,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-ice.jpg"
       }
     },
     "Rose": {
@@ -110,7 +112,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-rose.jpg"
       }
     },
     "Smoke": {
@@ -140,7 +143,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-smoke.jpg"
       }
     }
   }

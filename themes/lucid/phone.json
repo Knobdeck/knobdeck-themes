@@ -82,7 +82,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "image": "phone-bg.jpg"
   },
   "presets": {
     "Clear": {
@@ -151,7 +152,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-dusk.jpg"
       }
     },
     "Deep": {
@@ -197,7 +199,8 @@
               ]
             ]
           }
-        ]
+        ],
+        "image": "phone-bg-deep.jpg"
       }
     }
   }
