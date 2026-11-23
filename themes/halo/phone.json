@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "mode": "dark",
+  "colors": {
+    "bg": "#0b0b0d",
+    "panel": "#1c1c1e",
+    "panelAlt": "#141416",
+    "text": "#f2f2f7",
+    "subtext": "#aeaeb2",
+    "faint": "#6e6e73",
+    "accent": "#0a84ff",
+    "onAccent": "#ffffff",
+    "line": "rgba(235,235,245,0.12)"
+  },
+  "cell": {
+    "fill": "rgba(28,28,30,0.94)",
+    "emptyFill": "rgba(28,28,30,0.4)",
+    "border": "rgba(235,235,245,0.12)",
+    "emptyBorder": "rgba(235,235,245,0.05)",
+    "borderWidth": 1,
+    "radius": {
+      "factor": 0.24,
+      "min": 10,
+      "max": 30
+    },
+    "icon": "#e5e5ea",
+    "label": "#f2f2f7",
+    "uppercase": false,
+    "weight": "600"
+  },
+  "background": {
+    "base": "#0b0b0d",
+    "layers": [
+      {
+        "type": "radial",
+        "cx": 0.5,
+        "cy": 0.35,
+        "r": 0.85,
+        "stops": [
+          [
+            0,
+            "#2a2a2d"
+          ],
+          [
+            1,
+            "#0b0b0d"
+          ]
+        ]
+      }
+    ]
+  },
+  "presets": {
+    "Graphite": {
+      "colors": {
+        "accent": "#98989d",
+        "onAccent": "#000000"
+      }
+    },
+    "Orange": {
+      "colors": {
+        "accent": "#ff9f0a",
+        "onAccent": "#1a0f00"
+      }
+    },
+    "Pink": {
+      "colors": {
+        "accent": "#ff375f"
+      }
+    },
+    "Green": {
+      "colors": {
+        "accent": "#30d158",
+        "onAccent": "#00140a"
+      }
+    }
+  }
+}

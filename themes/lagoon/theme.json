@@ -2,7 +2,7 @@
   "name": "Lagoon",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Navy items that float over the desktop, a dark glass hub and an aqua light on the item you pick.",
   "engineVersion": 1,
   "maxMenuRadius": 170,

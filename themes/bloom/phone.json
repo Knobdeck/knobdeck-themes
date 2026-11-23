@@ -1,0 +1,359 @@
+{
+  "format": 1,
+  "mode": "light",
+  "colors": {
+    "bg": "#faf6f9",
+    "panel": "#ffffff",
+    "panelAlt": "#f0e6ef",
+    "text": "#3b2f45",
+    "subtext": "#6b5c78",
+    "faint": "#9a8ca6",
+    "accent": "#d6589a",
+    "onAccent": "#ffffff"
+  },
+  "cell": {
+    "fill": "rgba(255,255,255,0.88)",
+    "emptyFill": "rgba(255,255,255,0.4)",
+    "border": "rgba(214,88,154,0.3)",
+    "emptyBorder": "rgba(214,88,154,0.12)",
+    "borderWidth": 1,
+    "radius": {
+      "factor": 0.34,
+      "min": 12,
+      "max": 48
+    },
+    "icon": "#6f4a86",
+    "label": "#3b2f45",
+    "uppercase": false
+  },
+  "background": {
+    "base": "#f4f1f3",
+    "layers": [
+      {
+        "type": "linear",
+        "angle": 135,
+        "stops": [
+          [
+            0,
+            "#fdfbfb"
+          ],
+          [
+            1,
+            "#e4e7ea"
+          ]
+        ]
+      },
+      {
+        "type": "radial",
+        "cx": 0.1,
+        "cy": 0.15,
+        "r": 0.6,
+        "stops": [
+          [
+            0,
+            "#ffb3d1",
+            0.55
+          ],
+          [
+            1,
+            "#ffb3d1",
+            0
+          ]
+        ]
+      },
+      {
+        "type": "radial",
+        "cx": 0.95,
+        "cy": 0.5,
+        "r": 0.6,
+        "stops": [
+          [
+            0,
+            "#b9e6c9",
+            0.55
+          ],
+          [
+            1,
+            "#b9e6c9",
+            0
+          ]
+        ]
+      },
+      {
+        "type": "radial",
+        "cx": 0.3,
+        "cy": 1,
+        "r": 0.6,
+        "stops": [
+          [
+            0,
+            "#c9bdf5",
+            0.55
+          ],
+          [
+            1,
+            "#c9bdf5",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  "presets": {
+    "Dusk": {
+      "mode": "dark",
+      "colors": {
+        "bg": "#1c1828",
+        "panel": "#2c2640",
+        "panelAlt": "#241f35",
+        "text": "#f4ecff",
+        "subtext": "#c9bedb",
+        "faint": "#8f83a3",
+        "accent": "#e27fb5",
+        "onAccent": "#1c0a14"
+      },
+      "cell": {
+        "fill": "rgba(30,26,44,0.94)",
+        "emptyFill": "rgba(30,26,44,0.4)",
+        "icon": "#e3cdf5",
+        "label": "#f4ecff"
+      },
+      "background": {
+        "base": "#1c1828",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                0,
+                "#2c2640"
+              ],
+              [
+                1,
+                "#14111d"
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.1,
+            "cy": 0.15,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#8a3d63",
+                0.55
+              ],
+              [
+                1,
+                "#8a3d63",
+                0
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.95,
+            "cy": 0.5,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#3d7a58",
+                0.5
+              ],
+              [
+                1,
+                "#3d7a58",
+                0
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.3,
+            "cy": 1,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#5a4a9c",
+                0.55
+              ],
+              [
+                1,
+                "#5a4a9c",
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "Mint": {
+      "colors": {
+        "accent": "#2fa37a"
+      },
+      "cell": {
+        "border": "rgba(47,163,122,0.3)",
+        "emptyBorder": "rgba(47,163,122,0.12)",
+        "icon": "#2f6f5a"
+      },
+      "background": {
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                0,
+                "#fdfbfb"
+              ],
+              [
+                1,
+                "#e4e7ea"
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.1,
+            "cy": 0.15,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#b3ffd9",
+                0.55
+              ],
+              [
+                1,
+                "#b3ffd9",
+                0
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.95,
+            "cy": 0.5,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#e6d4b9",
+                0.55
+              ],
+              [
+                1,
+                "#e6d4b9",
+                0
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.3,
+            "cy": 1,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#bdf0f5",
+                0.55
+              ],
+              [
+                1,
+                "#bdf0f5",
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "Vivid": {
+      "colors": {
+        "accent": "#e0307f"
+      },
+      "cell": {
+        "border": "rgba(224,48,127,0.4)",
+        "icon": "#5a2a78"
+      },
+      "background": {
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                0,
+                "#fdfbfb"
+              ],
+              [
+                1,
+                "#e4e7ea"
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.1,
+            "cy": 0.15,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#ff6fa8",
+                0.6
+              ],
+              [
+                1,
+                "#ff6fa8",
+                0
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.95,
+            "cy": 0.5,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#5fd68f",
+                0.6
+              ],
+              [
+                1,
+                "#5fd68f",
+                0
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.3,
+            "cy": 1,
+            "r": 0.6,
+            "stops": [
+              [
+                0,
+                "#8f7cf0",
+                0.6
+              ],
+              [
+                1,
+                "#8f7cf0",
+                0
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

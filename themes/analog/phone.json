@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "mode": "dark",
+  "colors": {
+    "bg": "#111215",
+    "panel": "#1f2125",
+    "panelAlt": "#18191c",
+    "text": "#eceef1",
+    "subtext": "#c9ccd2",
+    "faint": "#858992",
+    "accent": "#ff7a1a",
+    "onAccent": "#1c0c00"
+  },
+  "cell": {
+    "fill": "rgba(36,38,43,0.9)",
+    "emptyFill": "rgba(20,21,24,0.5)",
+    "border": "rgba(255,255,255,0.12)",
+    "emptyBorder": "rgba(255,255,255,0.05)",
+    "borderWidth": 1,
+    "radius": {
+      "factor": 0.12,
+      "min": 6,
+      "max": 12
+    },
+    "icon": "#c9ccd2",
+    "label": "#eceef1",
+    "font": "mono",
+    "weight": "600"
+  },
+  "background": {
+    "base": "#111215",
+    "layers": [
+      {
+        "type": "linear",
+        "angle": 160,
+        "stops": [
+          [
+            0,
+            "#2e3036"
+          ],
+          [
+            1,
+            "#111215"
+          ]
+        ]
+      }
+    ]
+  },
+  "presets": {
+    "Blue": {
+      "colors": {
+        "accent": "#3aa0ff",
+        "onAccent": "#00121f"
+      }
+    },
+    "Green": {
+      "colors": {
+        "accent": "#34e07a",
+        "onAccent": "#00170a"
+      }
+    },
+    "Red": {
+      "colors": {
+        "accent": "#ff3b30",
+        "onAccent": "#ffffff"
+      }
+    },
+    "White": {
+      "colors": {
+        "accent": "#f4f4f4",
+        "onAccent": "#111215"
+      }
+    }
+  }
+}

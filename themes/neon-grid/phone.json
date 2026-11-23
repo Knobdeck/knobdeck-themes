@@ -1,0 +1,262 @@
+{
+  "format": 1,
+  "mode": "dark",
+  "colors": {
+    "bg": "#0d0221",
+    "panel": "#1f0b3a",
+    "panelAlt": "#16052b",
+    "text": "#ffffff",
+    "subtext": "#cdbbea",
+    "faint": "#8d79b0",
+    "accent": "#ff2bd6",
+    "onAccent": "#ffffff",
+    "line": "rgba(255,43,214,0.35)"
+  },
+  "cell": {
+    "fill": "rgba(22,5,43,0.84)",
+    "emptyFill": "rgba(22,5,43,0.35)",
+    "border": "#ff2bd6",
+    "emptyBorder": "rgba(255,43,214,0.25)",
+    "borderWidth": 2,
+    "radius": {
+      "factor": 0.22,
+      "min": 10,
+      "max": 30
+    },
+    "icon": "#4df3ff",
+    "label": "#ffffff",
+    "weight": "800",
+    "pressed": "rgba(77,243,255,0.22)",
+    "sliderFill": "#4df3ff"
+  },
+  "background": {
+    "base": "#0d0221",
+    "image": "phone-bg.jpg",
+    "layers": [
+      {
+        "type": "linear",
+        "angle": 180,
+        "stops": [
+          [
+            0,
+            "#0d0221"
+          ],
+          [
+            1,
+            "#2a0845"
+          ]
+        ]
+      },
+      {
+        "type": "radial",
+        "cx": 0.5,
+        "cy": 1,
+        "r": 0.7,
+        "stops": [
+          [
+            0,
+            "#ff3d7f",
+            0.5
+          ],
+          [
+            0.5,
+            "#ffd34e",
+            0.12
+          ],
+          [
+            1,
+            "#ff3d7f",
+            0
+          ]
+        ]
+      }
+    ],
+    "pattern": {
+      "type": "grid",
+      "color": "#4df3ff",
+      "opacity": 0.14
+    }
+  },
+  "presets": {
+    "Laser": {
+      "colors": {
+        "accent": "#ff2d2d",
+        "line": "#ff2d2d"
+      },
+      "cell": {
+        "border": "#ff2d2d",
+        "icon": "#3d7bff",
+        "sliderFill": "#3d7bff",
+        "pressed": "#3d7bff"
+      },
+      "background": {
+        "image": null,
+        "base": "#0a0620",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 180,
+            "stops": [
+              [
+                0,
+                "#0a0620"
+              ],
+              [
+                1,
+                "#0a0620"
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.5,
+            "cy": 1,
+            "r": 0.7,
+            "stops": [
+              [
+                0,
+                "#ff2d55",
+                0.5
+              ],
+              [
+                0.5,
+                "#ffb199",
+                0.12
+              ],
+              [
+                1,
+                "#ff2d55",
+                0
+              ]
+            ]
+          }
+        ],
+        "pattern": {
+          "type": "grid",
+          "color": "#3d7bff",
+          "opacity": 0.14
+        }
+      }
+    },
+    "Miami": {
+      "colors": {
+        "accent": "#ff4fa3",
+        "line": "#ff4fa3"
+      },
+      "cell": {
+        "border": "#ff4fa3",
+        "icon": "#2ee6d6",
+        "sliderFill": "#2ee6d6",
+        "pressed": "#2ee6d6"
+      },
+      "background": {
+        "image": null,
+        "base": "#16052b",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 180,
+            "stops": [
+              [
+                0,
+                "#16052b"
+              ],
+              [
+                1,
+                "#16052b"
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.5,
+            "cy": 1,
+            "r": 0.7,
+            "stops": [
+              [
+                0,
+                "#ff6f91",
+                0.5
+              ],
+              [
+                0.5,
+                "#ffe08a",
+                0.12
+              ],
+              [
+                1,
+                "#ff6f91",
+                0
+              ]
+            ]
+          }
+        ],
+        "pattern": {
+          "type": "grid",
+          "color": "#2ee6d6",
+          "opacity": 0.14
+        }
+      }
+    },
+    "Toxic": {
+      "colors": {
+        "accent": "#b4ff00",
+        "line": "#b4ff00"
+      },
+      "cell": {
+        "border": "#b4ff00",
+        "icon": "#ff00e6",
+        "sliderFill": "#ff00e6",
+        "pressed": "#ff00e6"
+      },
+      "background": {
+        "image": null,
+        "base": "#061a0e",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 180,
+            "stops": [
+              [
+                0,
+                "#061a0e"
+              ],
+              [
+                1,
+                "#061a0e"
+              ]
+            ]
+          },
+          {
+            "type": "radial",
+            "cx": 0.5,
+            "cy": 1,
+            "r": 0.7,
+            "stops": [
+              [
+                0,
+                "#2bd46a",
+                0.5
+              ],
+              [
+                0.5,
+                "#f6ff7a",
+                0.12
+              ],
+              [
+                1,
+                "#2bd46a",
+                0
+              ]
+            ]
+          }
+        ],
+        "pattern": {
+          "type": "grid",
+          "color": "#ff00e6",
+          "opacity": 0.14
+        }
+      }
+    }
+  }
+}

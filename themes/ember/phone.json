@@ -1,0 +1,132 @@
+{
+  "format": 1,
+  "mode": "dark",
+  "colors": {
+    "bg": "#0d0906",
+    "panel": "#1c130c",
+    "panelAlt": "#140e09",
+    "text": "#ffd59a",
+    "subtext": "#c9a06a",
+    "faint": "#8a6a44",
+    "accent": "#ff9f2e",
+    "onAccent": "#1a0d00"
+  },
+  "cell": {
+    "fill": "rgba(11,8,6,0.86)",
+    "emptyFill": "rgba(11,8,6,0.4)",
+    "border": "rgba(255,159,46,0.34)",
+    "emptyBorder": "rgba(255,159,46,0.12)",
+    "borderWidth": 1,
+    "icon": "#ff9f2e",
+    "label": "#ffd59a"
+  },
+  "background": {
+    "base": "#0d0906",
+    "image": "phone-bg.jpg",
+    "layers": [
+      {
+        "type": "radial",
+        "cx": 0.4,
+        "cy": 0.3,
+        "r": 0.75,
+        "stops": [
+          [
+            0,
+            "#3b2a1e"
+          ],
+          [
+            1,
+            "#0d0906"
+          ]
+        ]
+      }
+    ]
+  },
+  "presets": {
+    "Ice": {
+      "colors": {
+        "accent": "#5fd4ff",
+        "text": "#bdeeff",
+        "subtext": "#86b9cc",
+        "onAccent": "#00141c"
+      },
+      "cell": {
+        "border": "rgba(95,212,255,0.34)",
+        "emptyBorder": "rgba(95,212,255,0.12)",
+        "icon": "#5fd4ff",
+        "label": "#bdeeff"
+      },
+      "background": {
+        "image": null,
+        "base": "#05090d",
+        "layers": [
+          {
+            "type": "radial",
+            "cx": 0.4,
+            "cy": 0.3,
+            "r": 0.75,
+            "stops": [
+              [
+                0,
+                "#1a2e3b"
+              ],
+              [
+                1,
+                "#05090d"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "Lime": {
+      "colors": {
+        "accent": "#b8ff3c",
+        "text": "#e2ffb0",
+        "subtext": "#a9c47e",
+        "onAccent": "#0f1a00"
+      },
+      "cell": {
+        "border": "rgba(184,255,60,0.34)",
+        "emptyBorder": "rgba(184,255,60,0.12)",
+        "icon": "#b8ff3c",
+        "label": "#e2ffb0"
+      },
+      "background": {
+        "image": null,
+        "base": "#070a04",
+        "layers": [
+          {
+            "type": "radial",
+            "cx": 0.4,
+            "cy": 0.3,
+            "r": 0.75,
+            "stops": [
+              [
+                0,
+                "#26331a"
+              ],
+              [
+                1,
+                "#070a04"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "Nixie": {
+      "colors": {
+        "accent": "#ff5a1f",
+        "text": "#ffb08a",
+        "onAccent": "#1a0600"
+      },
+      "cell": {
+        "border": "rgba(255,90,31,0.34)",
+        "emptyBorder": "rgba(255,90,31,0.12)",
+        "icon": "#ff5a1f",
+        "label": "#ffb08a"
+      }
+    }
+  }
+}
