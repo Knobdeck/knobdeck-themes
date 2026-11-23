@@ -2,7 +2,7 @@
   "name": "Bloom",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Soft petals in pastel colours that shift with their direction around the dial.",
   "engineVersion": 1,
   "maxMenuRadius": 180,

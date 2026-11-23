@@ -1,7 +1,10 @@
 # knobdeck-themes
 
-Dial themes for KnobDeck, all original. The app ships three built-ins (**Auto**, **Midnight** and
-**Daylight**, in `Knobdeck/app/public/dial-themes/`); everything here is downloaded from the Themes page.
+Themes for KnobDeck, all original. A theme styles the dial overlay on the PC and the deck of every
+phone connected to that PC: the PC picks the theme (Themes in the config window) and tells its phones
+the id; each phone downloads the theme's phone counterpart from the registry itself. The app ships
+three built-ins (**Auto**, **Midnight** and **Daylight**, in `Knobdeck/app/public/dial-themes/`; the phone
+app has its own copies); everything here is downloaded from the Themes page.
 
 | Theme | Look | Presets |
 |---|---|---|
@@ -13,25 +16,26 @@ Dial themes for KnobDeck, all original. The app ships three built-ins (**Auto**,
 | `neon-grid` | Synthwave sunset over a neon grid | Miami, Laser, Toxic |
 | `paper` | Ink on paper, hand-drawn outlines, highlighter hover | Blueprint, Kraft, Chalk |
 | `bloom` | Pastel petals coloured by their direction | Vivid, Mint, Dusk |
-| `mono-line` | Thin outlines only | Ink (light wallpapers), Gold |
 | `aurora` | Dark glass with a turning aurora glow | Solar, Ocean, Rose |
 | `studio` | Creator console with an on-air light | Violet, Teal, Gold |
 | `contrast` | Accessibility: bold outlines, large targets, almost no motion | Black on White, White on Blue |
-| `forge` | A rusted iron wheel set with carved stone slabs: each item is a slab cut to its slot, its rune glowing (engine 2) | Frost, Hellfire, Venom |
+| `lagoon` | Navy items floating over the desktop, a dark glass hub, an aqua light on the picked item | Ice, Amber, Rose, Violet |
 | `halo` | A quiet dark platter with a watch-face scale: gray slices, crisp edges, a blue bead beside the item you point at (engine 2) | Graphite, Orange, Pink, Green |
 | `lucid` | Liquid glass: clear panels with bright rims on a faint smoked disc, the hovered one filling with light (engine 2) | Clear, Dusk, Deep |
 | `pane` | A layered dark surface with small-radius tiles and hairline strokes; the hovered item gets an accent pill (engine 2) | Orange, Purple, Green |
 | `void` | Pure black, drawn only in hairlines and light; every move on a spring, folders pour out of the centre (engine 2) | Ice, Ember, Violet |
 
 - `themes/<id>/`: `theme.json`, `theme.css`, optional `presets/<Name>.json` and assets the CSS links
-  relatively (`url("plate.webp")`).
+  relatively (`url("plate.webp")`), plus the phone counterpart `phone.json` and optional `phone-bg.jpg`
+  (see "Phone themes"; both stay out of the dial zip).
 - Whole-menu art is a layer on the open center sized past the ring, with `drawChildrenBelow: false` so
   the items sit on top of it.
 - `previews/<id>.gif`: the preview shown in the app before download. It isn't a release asset: the
   registry links it by raw GitHub URL, so a new GIF shows up without a release.
 
 Pushing to `master` runs the **release** workflow: it zips every theme and publishes a GitHub Release
-with `<id>.zip` and a `registry.json` (id, name, author, version, zipUrl, sha256, preview). Once the release
+with `<id>.zip`, `<id>.phone.json` (+ `<id>.phone-bg.jpg` when the theme has one) and a `registry.json`
+(id, name, author, version, zipUrl, sha256, preview, phone: { url, sha256 }). Once the release
 exists it sends a `theme-released` dispatch to the `knobdeck-registry` catalog, which rebuilds and serves it (skipped
 until the catalog GitHub App is configured: `CATALOG_APP_ID` variable, `CATALOG_APP_PRIVATE_KEY` secret).
 
@@ -52,7 +56,7 @@ The dial engine is `Knobdeck/app/src/dial/overlay/` (Kando's theme format, engin
 | `sliderStyle` | `"track"` (every theme here): a slider opens as a dial scale. Each value stop is a tick: every step of the slider, or every 2nd / 5th / 10th… when that is more than 61, spread over 300°. See the slider hooks below. `"steps"` (default when absent): 16 value items on the ring. |
 | `dynamicCenter` | Optional `{ childDistance, itemSpacing, childSize, gap, growth, minSize, maxSize, textRatio }` in px, mirroring the theme CSS. When set, a dynamic ring's center starts at `minSize` and grows `growth` px for each px the ring widens past `childDistance` (staying `gap` clear of the items, up to `maxSize`), the engine sets `--dynamic-center-size` on it, and the hovered item's text wraps into `size × textRatio`. |
 | `previewBackground` | CSS background for the preview tool only; the app ignores it. |
-| `slices` | Engine 2 (`engineVersion: 2`): the items are drawn as pieces of one object, cut live to each item's wedge by the dial's slice renderer (`Knobdeck/app/src/dial/overlay/slices.js`, which documents every field). Either material maps (`maps`: albedo / normal / roughness, lit per pixel with a bevel, a sunken field and joint shadows; `forge`) or painted art (`tile` / `tileHover`: one slice for a ring of `tileSpan` degrees, warped to fit). The open center gets `kd-sliced` while it's drawn, so the CSS can fall back to its own item look without it. |
+| `slices` | Engine 2 (`engineVersion: 2`): the items are drawn as pieces of one object, cut live to each item's wedge by the dial's slice renderer (`Knobdeck/app/src/dial/overlay/slices.js`, which documents every field). Either material maps (`maps`: albedo / normal / roughness, lit per pixel with a bevel, a sunken field and joint shadows; `halo`) or painted art (`tile` / `tileHover`: one slice for a ring of `tileSpan` degrees, warped to fit). The open center gets `kd-sliced` while it's drawn, so the CSS can fall back to its own item look without it. |
 
 **What the CSS can use**
 
@@ -85,11 +89,47 @@ The dial engine is `Knobdeck/app/src/dial/overlay/` (Kando's theme format, engin
 - The dial window is transparent and `backdrop-filter` can't see the desktop behind it, so glass
   looks need enough tint to read on a busy wallpaper. Respect `prefers-reduced-motion`.
 
+## Phone themes
+
+The phone app has no CSS: its theme is colours, a cell look and a backdrop. Every theme here has
+`themes/<id>/phone.json` (the release adds `id`, `name`, `description`, `version` and turns the image
+into a release URL with `imageSha256`). Colours that get an opacity applied must be `#rrggbb`
+(`colors.bg`, `text`, `accent`, `onBackground`, `cell.icon`); the others may be any CSS colour.
+
+```json
+{
+  "format": 1,
+  "mode": "dark",
+  "colors": { "bg", "panel", "panelAlt", "text", "subtext", "faint", "accent", "onAccent",
+              "onBackground?", "line?", "danger?" },
+  "cell": { "fill", "emptyFill", "border", "emptyBorder", "borderWidth", "icon",
+            "label?", "pressed?", "sliderFill?", "sliderThumb?", "font?": "mono",
+            "weight?", "uppercase?", "extra?": { "borderRightWidth": 4 }, "blur?": "light|dark",
+            "radius?": { "factor", "min", "max" } },
+  "background": { "base": "#000000", "image?": "phone-bg.jpg",
+                  "layers": [{ "type": "linear", "angle": 160, "stops": [[0, "#2e3036"], [1, "#111215", 1]] },
+                             { "type": "radial", "cx": 0.5, "cy": 0, "r": 0.9, "stops": [[0, "#6ce39a", 0.16]] }],
+                  "pattern?": { "type": "scanlines|grid|dots", "color": "#000000", "opacity": 0.35 } },
+  "presets": { "<Name>": { "mode?", "colors?": {}, "cell?": {}, "background?": {} } }
+}
+```
+
+- `onBackground`: text straight on the backdrop (header, page dots); `line`: hairlines. `cell.radius`:
+  the corner is `factor × cell size`, clamped to `min`..`max` px.
+- The backdrop is drawn base colour → image (cover, 1080×2340 or so, JPEG under ~200 KB, under a light
+  scrim in `colors.bg`) or, without an image, the gradient layers → pattern. Keep the layers even with an
+  image: they show while the image loads and for presets that drop it. Stops are
+  `[offset 0..1, colour, opacity = 1]`, angles CSS-style (0 = up).
+- `presets` has one entry for every name in theme.json's `presets` (CI checks), merged over the theme
+  when the PC picks that preset. `"image": null` in a preset's `background` drops the image (a preset
+  that changes the hue usually should).
+
 **Checklist before shipping a theme**
 
 Render it in the real dial engine and look at every state: idle and hovered, an open submenu,
 4 / 8 / 12 items, long labels, an open slider (at rest, with a value hovered, and a coarse 0–10 one),
-and every preset (menu and slider). Then make its preview GIF (`previews/<id>.gif`). The maintainers'
+and every preset (menu and slider). Then make its preview GIF (`previews/<id>.gif`) and write its
+`phone.json`, checked on a phone (or the phone app's web build) with every preset. The maintainers'
 preview and art tools live outside this repo; a contributor can send the theme and we render it.
 
 Check the registry build locally: `node scripts/build-registry.mjs test` (needs `zip`), output in `out/`.

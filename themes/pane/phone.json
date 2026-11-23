@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "mode": "dark",
+  "colors": {
+    "bg": "#1c1c1c",
+    "panel": "#2b2b2b",
+    "panelAlt": "#202020",
+    "text": "#ffffff",
+    "subtext": "#c5c5c5",
+    "faint": "#8a8a8a",
+    "accent": "#60cdff",
+    "onAccent": "#000000",
+    "line": "rgba(255,255,255,0.08)"
+  },
+  "cell": {
+    "fill": "rgba(43,43,43,0.94)",
+    "emptyFill": "rgba(43,43,43,0.4)",
+    "border": "rgba(255,255,255,0.08)",
+    "emptyBorder": "rgba(255,255,255,0.04)",
+    "borderWidth": 1,
+    "radius": {
+      "factor": 0.08,
+      "min": 4,
+      "max": 8
+    },
+    "icon": "#ffffff",
+    "uppercase": false,
+    "weight": "600"
+  },
+  "background": {
+    "base": "#1c1c1c",
+    "layers": [
+      {
+        "type": "linear",
+        "angle": 160,
+        "stops": [
+          [
+            0,
+            "#2b2b2b"
+          ],
+          [
+            1,
+            "#161616"
+          ]
+        ]
+      }
+    ]
+  },
+  "presets": {
+    "Orange": {
+      "colors": {
+        "accent": "#ffb455"
+      }
+    },
+    "Purple": {
+      "colors": {
+        "accent": "#c8a6ff"
+      }
+    },
+    "Green": {
+      "colors": {
+        "accent": "#6ccb5f"
+      }
+    }
+  }
+}

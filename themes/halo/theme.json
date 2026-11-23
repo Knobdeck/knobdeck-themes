@@ -2,7 +2,7 @@
   "name": "Halo",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A quiet dark platter with a watch-face scale: gray slices, crisp edges, and a blue pointer that turns to the item you point at.",
   "engineVersion": 2,
   "maxMenuRadius": 170,

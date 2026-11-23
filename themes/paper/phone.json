@@ -1,0 +1,194 @@
+{
+  "format": 1,
+  "mode": "light",
+  "colors": {
+    "bg": "#efe9dc",
+    "panel": "#fbf8f1",
+    "panelAlt": "#e3dccb",
+    "text": "#1f1d1a",
+    "subtext": "#55504a",
+    "faint": "#857e74",
+    "accent": "#1f1d1a",
+    "onAccent": "#fbf8f1",
+    "line": "rgba(31,29,26,0.3)"
+  },
+  "cell": {
+    "fill": "rgba(251,248,241,0.97)",
+    "emptyFill": "rgba(251,248,241,0.3)",
+    "border": "#1f1d1a",
+    "emptyBorder": "rgba(31,29,26,0.25)",
+    "borderWidth": 2,
+    "radius": {
+      "factor": 0.14,
+      "min": 8,
+      "max": 20
+    },
+    "extra": {
+      "borderRightWidth": 4,
+      "borderBottomWidth": 4
+    },
+    "icon": "#1f1d1a",
+    "pressed": "#ffe45c"
+  },
+  "background": {
+    "base": "#e6dfcf",
+    "layers": [
+      {
+        "type": "linear",
+        "angle": 135,
+        "stops": [
+          [
+            0,
+            "#efe9dc"
+          ],
+          [
+            1,
+            "#d6cebd"
+          ]
+        ]
+      }
+    ],
+    "pattern": {
+      "type": "dots",
+      "color": "#1f1d1a",
+      "opacity": 0.1
+    }
+  },
+  "presets": {
+    "Blueprint": {
+      "mode": "dark",
+      "colors": {
+        "bg": "#1f4e8c",
+        "panel": "#1f4e8c",
+        "panelAlt": "#173d70",
+        "text": "#eaf2ff",
+        "subtext": "#eaf2ff",
+        "faint": "#eaf2ff",
+        "accent": "#eaf2ff",
+        "onAccent": "#1f4e8c",
+        "line": "#eaf2ff"
+      },
+      "cell": {
+        "fill": "#1f4e8c",
+        "emptyFill": "#1f4e8c",
+        "border": "#eaf2ff",
+        "icon": "#eaf2ff",
+        "pressed": "#3f78c4"
+      },
+      "background": {
+        "base": "#173d70",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                0,
+                "#1f4e8c"
+              ],
+              [
+                1,
+                "#173d70"
+              ]
+            ]
+          }
+        ],
+        "pattern": {
+          "type": "dots",
+          "color": "#eaf2ff",
+          "opacity": 0.1
+        }
+      }
+    },
+    "Chalk": {
+      "mode": "dark",
+      "colors": {
+        "bg": "#2a2d2b",
+        "panel": "#2a2d2b",
+        "panelAlt": "#1f2220",
+        "text": "#f1efe8",
+        "subtext": "#f1efe8",
+        "faint": "#f1efe8",
+        "accent": "#f1efe8",
+        "onAccent": "#2a2d2b",
+        "line": "#f1efe8"
+      },
+      "cell": {
+        "fill": "#2a2d2b",
+        "emptyFill": "#2a2d2b",
+        "border": "#f1efe8",
+        "icon": "#f1efe8",
+        "pressed": "#ff8fab"
+      },
+      "background": {
+        "base": "#1f2220",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                0,
+                "#2a2d2b"
+              ],
+              [
+                1,
+                "#1f2220"
+              ]
+            ]
+          }
+        ],
+        "pattern": {
+          "type": "dots",
+          "color": "#f1efe8",
+          "opacity": 0.1
+        }
+      }
+    },
+    "Kraft": {
+      "mode": "light",
+      "colors": {
+        "bg": "#c9a46b",
+        "panel": "#c9a46b",
+        "panelAlt": "#b38e57",
+        "text": "#2b1d0e",
+        "subtext": "#2b1d0e",
+        "faint": "#2b1d0e",
+        "accent": "#2b1d0e",
+        "onAccent": "#c9a46b",
+        "line": "#2b1d0e"
+      },
+      "cell": {
+        "fill": "#c9a46b",
+        "emptyFill": "#c9a46b",
+        "border": "#2b1d0e",
+        "icon": "#2b1d0e",
+        "pressed": "#fff1c2"
+      },
+      "background": {
+        "base": "#b38e57",
+        "layers": [
+          {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                0,
+                "#c9a46b"
+              ],
+              [
+                1,
+                "#b38e57"
+              ]
+            ]
+          }
+        ],
+        "pattern": {
+          "type": "dots",
+          "color": "#2b1d0e",
+          "opacity": 0.1
+        }
+      }
+    }
+  }
+}
