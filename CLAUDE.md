@@ -22,7 +22,8 @@ the `knobdeck-registry` catalog (a `theme-released` dispatch) to rebuild, so the
 
 Ship only KnobDeck's own themes (CC0-1.0, `"author": "KnobDeck"` unless a contributor made it). Before
 shipping, render it with `node preview/preview.mjs check <id>` and `presets <id>` (run from
-`../knobdeck-theme-tools`) and look at every state; regenerate the GIF with `gif <id>`. README.md lists what the theme CSS can use.
+`../knobdeck-theme-tools`) and look at every state; regenerate the GIF with `gif <id>`. After a `phone.json` or `phone-bg*` change, regenerate its deck previews with `node phone/deck-preview.mjs <id>`
+(`previews/<id>.deck*.webp`, `<id>.phone*.webp`, linked by raw URL like the GIFs). README.md lists what the theme CSS can use.
 
 ## Rule 4: this repo holds themes only
 
