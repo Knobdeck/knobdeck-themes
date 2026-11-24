@@ -107,7 +107,7 @@ background art; only the app's built-ins (Midnight, Daylight) are plain. The art
               "onBackground?", "line?", "danger?" },
   "cell": { "fill", "emptyFill", "border", "emptyBorder", "borderWidth", "icon",
             "label?", "pressed?", "sliderFill?", "sliderThumb?", "font?": "mono",
-            "weight?", "uppercase?", "extra?": { "borderRightWidth": 4 }, "blur?": "light|dark",
+            "weight?", "uppercase?", "extra?": { "borderRightWidth": 4 }, "blur?": "light|dark|clear",
             "radius?": { "factor", "min", "max" } },
   "background": { "base": "#000000", "image": "phone-bg.jpg",
                   "layers": [{ "type": "linear", "angle": 160, "stops": [[0, "#2e3036"], [1, "#111215", 1]] },
@@ -117,6 +117,8 @@ background art; only the app's built-ins (Midnight, Daylight) are plain. The art
 }
 ```
 
+- `cell.blur`: the blur sheet behind the cells, `light` or `dark` (default: `mode`) for a solid frosted cell, `clear`
+  for see-through glass (faint blur, the `fill` does the tinting).
 - `onBackground`: text straight on the backdrop (header, page dots); `line`: hairlines. `cell.radius`:
   the corner is `factor × cell size`, clamped to `min`..`max` px.
 - The backdrop is the base colour, then the image (cover, 1080×2340, JPEG under ~250 KB, under a light
