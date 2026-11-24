@@ -10,7 +10,6 @@ app has its own copies); everything here is downloaded from the Themes page.
 |---|---|---|
 | `analog` | Hardware synth knob: knurled metal, tick marks, an LED arc that follows the pointer | Red, Green, Blue, White |
 | `graphite` | Machined aluminium: spun-metal center, brushed buttons, engraved icons | Space Gray, Gold, Navy |
-| `frost` | Frosted glass discs with a sheen | Smoke, Ice, Rose |
 | `ember` | Amber on black with a segmented meter | Nixie, Ice, Lime |
 | `phosphor` | Green-screen terminal: square tiles, scanlines, monospace | Amber, White, Cyan |
 | `neon-grid` | Synthwave sunset over a neon grid | Miami, Laser, Toxic |
