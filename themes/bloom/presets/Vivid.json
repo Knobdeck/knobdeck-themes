@@ -2,6 +2,7 @@
   "colors": {
     "petal-saturation": "95%",
     "petal-lightness": "68%",
-    "icon-lightness": "30%"
+    "icon-lightness": "30%",
+    "icon-ink": "#5a2a78"
   }
 }

@@ -2,7 +2,7 @@
   "name": "Phosphor",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A green-screen terminal: square tiles, scanlines and glowing monospace labels.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -21,7 +21,8 @@
   "colors": {
     "accent-color": "#39ff6a",
     "surface-color": "rgba(0, 12, 3, 0.9)",
-    "wedge-highlight-color": "rgba(57, 255, 106, 0.1)"
+    "wedge-highlight-color": "rgba(57, 255, 106, 0.1)",
+    "icon-ink": "#39ff6a"
   },
   "layers": [
     {

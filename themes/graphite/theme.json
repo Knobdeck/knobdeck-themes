@@ -2,7 +2,7 @@
   "name": "Graphite",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Machined aluminium: a spun-metal center, brushed buttons and engraved icons.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -26,7 +26,8 @@
     "engrave-color": "rgba(255, 255, 255, 0.7)",
     "text-color": "#1e2125",
     "accent-color": "#2f6fd6",
-    "on-accent-color": "#ffffff"
+    "on-accent-color": "#ffffff",
+    "icon-ink": "#2a2d32"
   },
   "layers": [
     {

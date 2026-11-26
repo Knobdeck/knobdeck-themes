@@ -1,6 +1,7 @@
 {
   "colors": {
     "hue-shift": "130deg",
-    "petal-lightness": "82%"
+    "petal-lightness": "82%",
+    "icon-ink": "#2f6f5a"
   }
 }

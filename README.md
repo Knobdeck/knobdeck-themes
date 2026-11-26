@@ -49,6 +49,7 @@ The dial engine is `Knobdeck/app/src/dial/overlay/` (Kando's theme format, engin
 | `name`, `author`, `license`, `version`, `description` | Shown in the app. `version` is semver (see CLAUDE.md). |
 | `layers` | One div per layer inside every node, **first = frontmost**. `content`: `"icon"`, `"name"` or `"none"`. |
 | `colors` | Set as `--<name>` custom properties; the CSS reads them. A preset overrides any of them. |
+| `colors.icon-ink` | `#rrggbb`. The colour the host draws every Lucide icon in on the dial and on phone decks (the icon is rendered once by the host, so it cannot follow hover). A preset may override it. Without it the host falls back to `icon-color`, then `text-color`. |
 | `presets` | Names of `presets/<Name>.json` files (`{"colors": {...}}`). The app offers them as chips. |
 | `centerTextWrapWidth` | Diameter the hovered item's name wraps into. |
 | `drawChildrenBelow`, `drawCenterText`, `drawSelectionWedges`, `drawWedgeSeparators` | Engine switches. |
