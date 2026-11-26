@@ -4,6 +4,7 @@
     "metal-lo": "#cfae80",
     "icon-color": "#4a3820",
     "text-color": "#3a2b17",
-    "accent-color": "#9a5b1e"
+    "accent-color": "#9a5b1e",
+    "icon-ink": "#4a3820"
   }
 }

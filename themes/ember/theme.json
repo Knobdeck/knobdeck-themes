@@ -2,7 +2,7 @@
   "name": "Ember",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Warm amber on black, with a segmented meter that lights up towards your pointer.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -22,7 +22,8 @@
     "accent-color": "#ff9f2e",
     "surface-color": "#0b0806",
     "text-color": "#ffd59a",
-    "wedge-highlight-color": "rgba(255, 159, 46, 0.12)"
+    "wedge-highlight-color": "rgba(255, 159, 46, 0.12)",
+    "icon-ink": "#ff9f2e"
   },
   "layers": [
     {

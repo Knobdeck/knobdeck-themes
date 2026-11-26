@@ -2,7 +2,7 @@
   "name": "Neon Grid",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Synthwave: a striped sunset over a glowing grid, ringed by neon buttons.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -24,7 +24,8 @@
     "sun-top": "#ffd34e",
     "sun-bottom": "#ff3d7f",
     "night-color": "#16052b",
-    "text-color": "#ffffff"
+    "text-color": "#ffffff",
+    "icon-ink": "#4df3ff"
   },
   "layers": [
     {

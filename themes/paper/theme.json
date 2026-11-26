@@ -2,7 +2,7 @@
   "name": "Paper",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Ink on paper: hand-drawn outlines, hard shadows and a highlighter for the hovered item.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -21,7 +21,8 @@
   "colors": {
     "paper-color": "#fbf8f1",
     "ink-color": "#1f1d1a",
-    "accent-color": "#ffe45c"
+    "accent-color": "#ffe45c",
+    "icon-ink": "#1f1d1a"
   },
   "layers": [
     {

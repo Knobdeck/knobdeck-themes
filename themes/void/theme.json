@@ -2,7 +2,7 @@
   "name": "Void",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Pure black: black slices on a black disc, drawn only in hairlines and light, and every move on a spring — folders pour out of the centre.",
   "engineVersion": 2,
   "maxMenuRadius": 170,
@@ -22,7 +22,8 @@
     "accent-color": "#ffffff",
     "icon-color": "rgba(255, 255, 255, 0.78)",
     "icon-hot": "#ffffff",
-    "text-color": "#ffffff"
+    "text-color": "#ffffff",
+    "icon-ink": "#c7c7c7"
   },
   "layers": [
     {

@@ -7,6 +7,7 @@
     "engrave-color": "rgba(0, 0, 0, 0.45)",
     "text-color": "#f1f4fa",
     "accent-color": "#e3a53c",
-    "on-accent-color": "#1d1606"
+    "on-accent-color": "#1d1606",
+    "icon-ink": "#e8edf7"
   }
 }

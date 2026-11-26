@@ -2,6 +2,7 @@
   "colors": {
     "accent-color": "#5fd4ff",
     "text-color": "#bdeeff",
-    "wedge-highlight-color": "rgba(95, 212, 255, 0.12)"
+    "wedge-highlight-color": "rgba(95, 212, 255, 0.12)",
+    "icon-ink": "#5fd4ff"
   }
 }

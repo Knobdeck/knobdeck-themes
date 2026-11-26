@@ -2,7 +2,7 @@
   "name": "Analog",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A hardware synth knob: knurled metal, tick marks and an LED arc that follows your pointer.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -24,7 +24,8 @@
     "icon-color": "#c9ccd2",
     "text-color": "#eceef1",
     "tick-color": "rgba(255, 255, 255, 0.2)",
-    "wedge-highlight-color": "rgba(255, 122, 26, 0.1)"
+    "wedge-highlight-color": "rgba(255, 122, 26, 0.1)",
+    "icon-ink": "#c9ccd2"
   },
   "layers": [
     {

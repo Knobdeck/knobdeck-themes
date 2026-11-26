@@ -2,7 +2,7 @@
   "name": "Contrast",
   "author": "KnobDeck",
   "license": "CC0-1.0",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Maximum legibility: bold outlines, large targets and labels, almost no motion.",
   "engineVersion": 1,
   "maxMenuRadius": 180,
@@ -21,7 +21,8 @@
     "back-color": "#000000",
     "fore-color": "#ffd400",
     "on-fore-color": "#000000",
-    "ring-color": "#ffffff"
+    "ring-color": "#ffffff",
+    "icon-ink": "#ffd400"
   },
   "layers": [
     {
